@@ -9,105 +9,125 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* =============================================
-       CSS CUSTOM PROPERTIES
+       DESIGN TOKENS
     ============================================= */
     :root {
-      --cream:      #FBF6EE;
-      --sand:       #EDE0CC;
-      --bark:       #5C3D26;
-      --soil:       #3A2215;
-      --sage:       #6B7C5A;
-      --sage-light: #97A886;
-      --gold:       #B8873A;
-      --gold-light: #D4A85C;
-      --warm-white: #FEFAF3;
-      --muted:      #9A7860;
-      --text:       #2C1C0E;
-      --text-soft:  #6B5440;
+      --cream:         #FDFCF9;
+      --sand-50:       #F5EFE6;
+      --sand-100:      #EDE0CC;
+      --sand-300:      #C8B49A;
+      --bark:          #5C3D26;
+      --soil:          #3A2215;
+      --sage:          #6B7C5A;
+      --sage-light:    #97A886;
+      --bronze:        #B8873A;
+      --bronze-light:  #D4A85C;
+      --bronze-muted:  #8F6A2E;
+      --charcoal:      #2C1C0E;
+      --charcoal-lt:   #6B5440;
+      --muted:         #9A7860;
 
-      --font-display: 'Frank Ruhl Libre', Georgia, serif;
-      --font-body:    'Assistant', Arial, sans-serif;
+      --font-display:  'Frank Ruhl Libre', Georgia, serif;
+      --font-deco:     'Cormorant Garamond', Georgia, serif;
+      --font-body:     'Assistant', Arial, sans-serif;
 
-      --radius: 16px;
-      --radius-lg: 32px;
-      --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --section-py:    8rem;
+      --container:     1160px;
+      --ease:          cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 
     /* =============================================
        RESET & BASE
     ============================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: var(--font-body);
       background: var(--cream);
-      color: var(--text);
+      color: var(--charcoal);
       direction: rtl;
       text-align: right;
       overflow-x: hidden;
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
 
     /* =============================================
-       NOISE TEXTURE OVERLAY
+       NOISE TEXTURE
     ============================================= */
     body::before {
       content: '';
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.012' fill-rule='evenodd'%3E%3Cpath d='M0 20L20 0h1L0 21zM20 20L40 0h1L20 21zM0 40L20 20h1L0 41zM20 40L40 20h1L20 41z'/%3E%3C/g%3E%3C/svg%3E");
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.4;
     }
 
     /* =============================================
        SCROLLBAR
     ============================================= */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--sand); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--sand-50); }
+    ::-webkit-scrollbar-thumb { background: var(--bronze); border-radius: 2px; }
 
     /* =============================================
-       TYPOGRAPHY HELPERS
+       LAYOUT
     ============================================= */
-    .display-heading {
-      font-family: var(--font-display);
-      font-weight: 700;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+    .container {
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    .section-label {
+    .section { padding: var(--section-py) 0; }
+
+    /* =============================================
+       TYPOGRAPHY SYSTEM  (Yaff Living signature)
+    ============================================= */
+    .eyebrow {
+      display: block;
       font-family: var(--font-body);
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--bronze-muted);
+      margin-bottom: 1.1rem;
+    }
+
+    /* thin gradient divider — Yaff Living signature */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to left, transparent, var(--bronze), transparent);
+      margin: 1.5rem 0;
+    }
+    .divider-c { margin: 1.5rem auto; }
+
+    h2.h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1.2;
+    }
+
+    .lead {
+      font-size: 0.97rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      line-height: 1.9;
+      max-width: 520px;
     }
 
     /* =============================================
@@ -115,277 +135,262 @@
     ============================================= */
     .nav {
       position: fixed;
-      top: 0;
-      right: 0;
-      left: 0;
+      top: 0; right: 0; left: 0;
       z-index: 1000;
-      padding: 1.25rem 2rem;
+      padding: 1.75rem 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      transition: background var(--transition), box-shadow var(--transition), padding var(--transition);
+      transition: all 0.35s var(--ease);
     }
 
     .nav.scrolled {
-      background: rgba(251, 246, 238, 0.97);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 2px 24px rgba(58, 34, 21, 0.08);
-      padding: 0.85rem 2rem;
+      background: rgba(253, 252, 249, 0.94);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      padding: 1rem 2rem;
+      box-shadow: 0 1px 0 rgba(92, 61, 38, 0.07);
     }
 
     .nav-logo {
       font-family: var(--font-display);
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--cream);
-      transition: color var(--transition);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: white;
+      transition: color 0.35s var(--ease);
+      letter-spacing: 0.02em;
+      cursor: default;
     }
-
-    .nav.scrolled .nav-logo {
-      color: var(--bark);
-    }
+    .nav.scrolled .nav-logo { color: var(--charcoal); }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 2.25rem;
       list-style: none;
       align-items: center;
     }
 
     .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: rgba(251, 246, 238, 0.9);
-      transition: color var(--transition);
-      position: relative;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.72);
+      transition: color 0.25s ease, opacity 0.25s ease;
     }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -3px;
-      right: 0;
-      width: 0;
-      height: 1.5px;
-      background: var(--gold);
-      transition: width var(--transition);
-    }
-
-    .nav-links a:hover::after { width: 100%; }
-
-    .nav.scrolled .nav-links a {
-      color: var(--text-soft);
-    }
-
-    .nav-links a:hover {
-      color: var(--gold);
-    }
+    .nav-links a:hover { color: white; }
+    .nav.scrolled .nav-links a { color: var(--charcoal-lt); }
+    .nav.scrolled .nav-links a:hover { color: var(--charcoal); }
 
     .nav-cta {
-      background: var(--gold);
-      color: white !important;
-      padding: 0.55rem 1.4rem;
-      border-radius: 50px;
-      font-weight: 600 !important;
-      transition: background var(--transition), transform 0.2s !important;
+      color: var(--bronze) !important;
+      border: 1px solid rgba(184,135,58,0.5) !important;
+      padding: 0.5rem 1.1rem;
+      border-radius: 2px;
+      transition: background 0.25s ease, color 0.25s ease !important;
+      cursor: pointer;
     }
+    .nav-cta:hover { background: var(--bronze) !important; color: white !important; }
+    .nav.scrolled .nav-cta { color: var(--bronze) !important; border-color: var(--bronze) !important; }
 
-    .nav-cta:hover {
-      background: var(--bark) !important;
-      transform: translateY(-1px);
-    }
-
-    .nav-cta::after { display: none !important; }
-
-    .nav-hamburger {
+    .hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
       padding: 4px;
     }
-
-    .nav-hamburger span {
+    .hamburger span {
       display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--cream);
-      border-radius: 2px;
-      transition: background var(--transition);
+      width: 22px;
+      height: 1.5px;
+      background: white;
+      border-radius: 1px;
+      transition: all 0.3s var(--ease);
     }
-
-    .nav.scrolled .nav-hamburger span { background: var(--bark); }
+    .nav.scrolled .hamburger span { background: var(--charcoal); }
 
     /* =============================================
-       HERO SECTION
+       HERO — full-screen, centered
     ============================================= */
     .hero {
-      min-height: 100vh;
+      height: 100vh;
+      min-height: 620px;
       position: relative;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       align-items: center;
+      justify-content: center;
       overflow: hidden;
-      background: var(--soil);
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 30% 60%, rgba(184, 135, 58, 0.18) 0%, transparent 60%),
-                  radial-gradient(ellipse at 80% 20%, rgba(107, 124, 90, 0.15) 0%, transparent 50%);
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(38, 22, 8, 0.38) 0%,
+        rgba(38, 22, 8, 0.58) 50%,
+        rgba(38, 22, 8, 0.70) 100%
+      );
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      padding: 8rem 4rem 6rem 2rem;
+      text-align: center;
+      padding: 0 1.5rem;
+      max-width: 700px;
     }
 
-    .hero-label {
-      display: inline-block;
-      margin-bottom: 1.5rem;
-      color: var(--gold-light);
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(184,135,58,0.14);
+      border: 1px solid rgba(184,135,58,0.32);
+      color: var(--bronze-light);
+      padding: 0.32rem 1rem;
+      border-radius: 50px;
+      font-size: 0.74rem;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      margin-bottom: 1.75rem;
+    }
+    .hero-badge-dot {
+      width: 5px;
+      height: 5px;
+      background: var(--bronze-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+      animation: pulseDot 2.5s ease-in-out infinite;
+    }
+    @keyframes pulseDot {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.35; transform:scale(0.55); }
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.75rem;
     }
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4vw, 4rem);
-      font-weight: 900;
+      font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+      font-weight: 300;
+      color: white;
       line-height: 1.15;
-      color: var(--cream);
-      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
-
     .hero-title em {
-      font-style: normal;
-      color: var(--gold-light);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--bronze-light);
     }
 
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: rgba(251, 246, 238, 0.75);
-      max-width: 420px;
-      line-height: 1.8;
-      margin-bottom: 2.5rem;
+    .hero-divider {
+      width: 60px;
+      height: 1px;
+      background: linear-gradient(to left, transparent, rgba(212,168,92,0.75), transparent);
+      margin: 2rem auto;
+    }
+
+    .hero-sub {
+      font-family: var(--font-deco);
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-style: italic;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.85;
+      margin-bottom: 2.75rem;
     }
 
     .hero-actions {
       display: flex;
       gap: 1rem;
+      justify-content: center;
       flex-wrap: wrap;
     }
 
-    .btn-primary {
+    .btn-hero-primary {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--gold);
+      background: var(--bronze);
       color: white;
-      padding: 0.85rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: background var(--transition), transform 0.2s, box-shadow var(--transition);
-      box-shadow: 0 4px 20px rgba(184, 135, 58, 0.35);
+      border: 1px solid var(--bronze);
+      padding: 0.88rem 2rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
     }
+    .btn-hero-primary:hover { background: var(--bark); border-color: var(--bark); }
 
-    .btn-primary:hover {
-      background: var(--gold-light);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(184, 135, 58, 0.45);
-    }
-
-    .btn-secondary {
+    .btn-hero-ghost {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       background: transparent;
-      color: rgba(251, 246, 238, 0.85);
-      padding: 0.85rem 2rem;
-      border-radius: 50px;
-      font-weight: 500;
-      font-size: 1rem;
-      border: 1.5px solid rgba(251, 246, 238, 0.3);
-      transition: all var(--transition);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.38);
+      padding: 0.88rem 2rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
     }
-
-    .btn-secondary:hover {
-      background: rgba(251, 246, 238, 0.1);
-      border-color: rgba(251, 246, 238, 0.6);
-      color: var(--cream);
-    }
+    .btn-hero-ghost:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.65); }
 
     .hero-stats {
       display: flex;
-      gap: 2rem;
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(251, 246, 238, 0.12);
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 3.5rem;
+      padding-top: 2.75rem;
+      border-top: 1px solid rgba(255,255,255,0.09);
     }
-
-    .hero-stat-number {
-      font-family: var(--font-display);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--gold-light);
+    .hero-stat-num {
+      display: block;
+      font-family: var(--font-deco);
+      font-size: 2.1rem;
+      font-weight: 300;
+      color: var(--bronze-light);
       line-height: 1;
     }
-
-    .hero-stat-label {
-      font-size: 0.8rem;
-      color: rgba(251, 246, 238, 0.55);
-      margin-top: 0.25rem;
+    .hero-stat-lbl {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      margin-top: 0.35rem;
+      font-weight: 300;
     }
 
-    .hero-image-side {
-      position: relative;
-      height: 100%;
-      min-height: 100vh;
-    }
-
-    .hero-image-wrap {
+    .hero-scroll {
       position: absolute;
-      inset: 0;
-      overflow: hidden;
-    }
-
-    .hero-image-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      filter: brightness(0.88) contrast(1.06);
-    }
-
-    .hero-image-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, var(--soil) 0%, transparent 40%),
-                  linear-gradient(to top, rgba(58, 34, 21, 0.4) 0%, transparent 50%);
-    }
-
-    /* Decorative elements */
-    .hero-decor-circle {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      border-radius: 50%;
-      border: 1px solid rgba(184, 135, 58, 0.15);
-      top: 50%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      pointer-events: none;
-      z-index: 3;
-    }
-
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 2rem;
+      bottom: 2.5rem;
       left: 50%;
       transform: translateX(-50%);
       z-index: 5;
@@ -393,603 +398,584 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5rem;
-      color: rgba(251, 246, 238, 0.45);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.38);
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 300;
+      cursor: pointer;
+      text-decoration: none;
     }
-
-    .scroll-arrow {
-      width: 24px;
-      height: 24px;
-      border-left: 1.5px solid rgba(251, 246, 238, 0.4);
-      border-bottom: 1.5px solid rgba(251, 246, 238, 0.4);
-      transform: rotate(-45deg);
-      animation: bounceDown 2s ease-in-out infinite;
+    .hero-scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.35), transparent);
+      animation: scrollAnim 2s ease-in-out infinite;
     }
-
-    @keyframes bounceDown {
-      0%, 100% { transform: rotate(-45deg) translateY(0); }
-      50% { transform: rotate(-45deg) translateY(5px); }
-    }
-
-    /* =============================================
-       WAVE DIVIDER
-    ============================================= */
-    .wave-divider {
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-      background: var(--soil);
-    }
-
-    .wave-divider svg {
-      display: block;
-      width: 100%;
+    @keyframes scrollAnim {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      49%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      50%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
     }
 
     /* =============================================
-       SECTION BASE
+       HERO ENTRANCE
     ============================================= */
-    .section {
-      padding: 6rem 0;
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0); }
     }
-
-    .container {
-      max-width: 1160px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .section-header {
-      margin-bottom: 3.5rem;
-    }
-
-    .section-header .section-label {
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      font-weight: 700;
-      line-height: 1.2;
-      color: var(--soil);
-    }
-
-    .section-desc {
-      margin-top: 0.75rem;
-      font-size: 1.05rem;
-      color: var(--text-soft);
-      max-width: 560px;
-      line-height: 1.8;
-    }
+    .hero-badge    { animation: fadeUp 0.7s ease both 0.1s; }
+    .hero-eyebrow  { animation: fadeUp 0.7s ease both 0.2s; }
+    .hero-title    { animation: fadeUp 0.7s ease both 0.3s; }
+    .hero-divider  { animation: fadeUp 0.7s ease both 0.4s; }
+    .hero-sub      { animation: fadeUp 0.7s ease both 0.5s; }
+    .hero-actions  { animation: fadeUp 0.7s ease both 0.6s; }
+    .hero-stats    { animation: fadeUp 0.7s ease both 0.7s; }
 
     /* =============================================
-       ABOUT SECTION
+       SCROLL REVEAL
     ============================================= */
-    .about {
-      background: var(--warm-white);
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.72s ease, transform 0.72s ease;
     }
+    .reveal.in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+
+    /* =============================================
+       ABOUT
+    ============================================= */
+    .about { background: var(--sand-50); }
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 6rem;
       align-items: center;
     }
 
-    .about-image-wrap {
-      position: relative;
-    }
+    .about-img-wrap { position: relative; }
 
     .about-img-main {
       width: 100%;
-      border-radius: var(--radius-lg);
-      box-shadow: 0 24px 64px rgba(58, 34, 21, 0.18);
-      aspect-ratio: 4/5;
+      aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center top;
+      border-radius: 2px;
+      box-shadow: 0 20px 60px rgba(58,34,21,0.16);
     }
 
     .about-img-accent {
       position: absolute;
-      bottom: -2rem;
-      left: -2rem;
-      width: 45%;
-      border-radius: var(--radius);
-      box-shadow: 0 16px 48px rgba(58, 34, 21, 0.22);
+      bottom: -2.5rem;
+      left: -2.5rem;
+      width: 44%;
       aspect-ratio: 1;
       object-fit: cover;
       object-position: top;
-      border: 4px solid var(--warm-white);
+      border-radius: 2px;
+      border: 4px solid var(--sand-50);
+      box-shadow: 0 8px 30px rgba(58,34,21,0.18);
     }
 
-    .about-decor {
+    /* decorative frame offset — Yaff Living style */
+    .about-frame {
       position: absolute;
-      top: -1.5rem;
-      right: -1.5rem;
-      width: 100px;
-      height: 100px;
-      border: 2px solid var(--sand);
-      border-radius: 50%;
+      top: -1.25rem;
+      right: -1.25rem;
+      bottom: 1.25rem;
+      left: 1.25rem;
+      border: 1px solid rgba(184,135,58,0.18);
+      border-radius: 2px;
+      pointer-events: none;
     }
 
-    .about-content {
-      padding-right: 1rem;
+    .body-text {
+      font-size: 0.96rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
     }
+    .body-text strong { color: var(--bark); font-weight: 500; }
 
-    .about-content .section-header {
-      margin-bottom: 2rem;
-    }
-
-    .about-text {
-      color: var(--text-soft);
-      line-height: 1.85;
-      margin-bottom: 1.25rem;
-      font-size: 1.02rem;
-    }
-
-    .about-text strong {
-      color: var(--bark);
-      font-weight: 600;
-    }
-
-    .about-highlight {
-      background: var(--sand);
-      border-right: 3px solid var(--gold);
-      padding: 1.25rem 1.5rem;
-      border-radius: 0 var(--radius) var(--radius) 0;
-      margin: 1.5rem 0;
+    .pull-quote {
+      font-family: var(--font-deco);
+      font-size: 1.15rem;
+      font-weight: 300;
       font-style: italic;
       color: var(--bark);
-      font-size: 1.1rem;
-      font-family: var(--font-display);
-      font-weight: 400;
-      line-height: 1.6;
+      border-right: 2px solid var(--bronze);
+      padding-right: 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.7;
     }
 
-    .about-tools {
+    .tag-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
+      gap: 0.45rem;
+      margin-top: 1.75rem;
     }
-
-    .tool-tag {
-      background: var(--cream);
-      border: 1px solid var(--sand);
+    .tag {
+      background: transparent;
+      border: 1px solid var(--sand-300);
       color: var(--bark);
-      padding: 0.35rem 0.85rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      transition: background var(--transition), border-color var(--transition);
+      padding: 0.28rem 0.8rem;
+      border-radius: 2px;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      transition: border-color 0.25s ease, background 0.25s ease;
     }
-
-    .tool-tag:hover {
-      background: var(--sand);
-      border-color: var(--gold);
-    }
+    .tag:hover { border-color: var(--bronze); background: rgba(184,135,58,0.05); }
 
     /* =============================================
-       SERVICES SECTION
+       SERVICES
     ============================================= */
-    .services {
-      background: var(--cream);
-    }
+    .services { background: var(--cream); }
 
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
-    .service-card {
-      background: var(--warm-white);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      border: 1px solid var(--sand);
-      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
-      position: relative;
+    .svc-card {
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--sand-100);
+      border-radius: 2px;
+      cursor: pointer;
       overflow: hidden;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .svc-card:hover {
+      border-color: rgba(184,135,58,0.28);
+      box-shadow: 0 8px 36px rgba(58,34,21,0.08);
     }
 
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 3px;
-      height: 0;
-      background: var(--gold);
-      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-      transition: height var(--transition);
-    }
-
-    .service-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 20px 60px rgba(58, 34, 21, 0.12);
-      border-color: var(--gold-light);
-    }
-
-    .service-card:hover::before { height: 100%; }
-
-    .service-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--sand);
-      border-radius: var(--radius);
+    .svc-head {
+      height: 76px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.25rem;
-      font-size: 1.6rem;
-      transition: background var(--transition);
     }
-
-    .service-card:hover .service-icon {
-      background: var(--gold);
+    .svc-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.38);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .svc-icon svg { width: 20px; height: 20px; color: white; }
 
-    .service-name {
+    .svc-body { padding: 1.4rem 1.6rem 1.6rem; }
+
+    .svc-name {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 400;
       color: var(--soil);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.45rem;
+    }
+    .svc-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      line-height: 1.8;
     }
 
-    .service-desc {
-      font-size: 0.93rem;
-      color: var(--text-soft);
-      line-height: 1.75;
-    }
+    .svc-sage  { background: linear-gradient(135deg, #4d6b40, #6b8a57); }
+    .svc-gold  { background: linear-gradient(135deg, #a67c30, #c89a4a); }
+    .svc-clay  { background: linear-gradient(135deg, #9a5040, #ba7060); }
+    .svc-sky   { background: linear-gradient(135deg, #3d6e8a, #5a8eae); }
+    .svc-plum  { background: linear-gradient(135deg, #604080, #8060a8); }
+    .svc-amber { background: linear-gradient(135deg, #7a5228, #9a7248); }
 
     /* =============================================
-       PROCESS SECTION
+       BACH FLOWERS
     ============================================= */
-    .process {
+    .bach { background: var(--sand-50); }
+
+    .bach-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: center;
+    }
+
+    .bach-img-wrap {
+      border-radius: 2px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      position: relative;
+      box-shadow: 0 20px 56px rgba(58,34,21,0.14);
+    }
+    .bach-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .bach-img-wrap:hover img { transform: scale(1.02); }
+
+    .bach-badge {
+      position: absolute;
+      bottom: 1.1rem;
+      right: 1.1rem;
+      background: rgba(253,252,249,0.96);
+      backdrop-filter: blur(8px);
+      border: 1px solid var(--sand-100);
+      border-radius: 2px;
+      padding: 0.55rem 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--bark);
+    }
+    .bach-badge svg { width: 13px; height: 13px; color: var(--sage); flex-shrink: 0; }
+
+    .bach-points { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+
+    .bach-pt {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 1.2rem;
+      background: rgba(255,255,255,0.6);
+      border: 1px solid var(--sand-100);
+      border-radius: 2px;
+      transition: border-color 0.25s ease;
+    }
+    .bach-pt:hover { border-color: rgba(107,124,90,0.28); }
+
+    .bach-pt-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--sage), var(--sage-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .bach-pt-icon svg { width: 14px; height: 14px; color: white; }
+
+    .bach-pt-title { font-weight: 500; color: var(--soil); font-size: 0.86rem; margin-bottom: 0.2rem; }
+    .bach-pt-desc  { font-size: 0.82rem; font-weight: 300; color: var(--charcoal-lt); line-height: 1.75; }
+
+    /* =============================================
+       CTA STRIP
+    ============================================= */
+    .cta-strip {
       background: var(--soil);
-      color: var(--cream);
+      padding: 5.5rem 0;
+      text-align: center;
       position: relative;
       overflow: hidden;
     }
-
-    .process::before {
+    .cta-strip::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(ellipse at 70% 50%, rgba(107, 124, 90, 0.15) 0%, transparent 60%),
-                  radial-gradient(ellipse at 20% 80%, rgba(184, 135, 58, 0.12) 0%, transparent 50%);
-      pointer-events: none;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 25% 50%, rgba(184,135,58,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 75% 50%, rgba(107,124,90,0.08) 0%, transparent 55%);
+    }
+    .cta-strip-inner { position: relative; z-index: 1; max-width: 540px; margin: 0 auto; padding: 0 2rem; }
+    .cta-strip h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: white;
+      margin-bottom: 0.65rem;
+    }
+    .cta-strip p {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 2.5rem;
     }
 
-    .process .section-title {
-      color: var(--cream);
+    /* =============================================
+       BUTTONS
+    ============================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.88rem 2.1rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-weight: 400;
+      cursor: pointer;
+      transition: background 0.25s ease, border-color 0.25s ease;
+      border: 1px solid transparent;
     }
-
-    .process .section-desc {
-      color: rgba(251, 246, 238, 0.65);
+    .btn-bronze {
+      background: var(--bronze);
+      color: white;
+      border-color: var(--bronze);
     }
+    .btn-bronze:hover { background: var(--bark); border-color: var(--bark); }
 
-    .process-steps {
+    .btn-dark {
+      background: var(--charcoal);
+      color: white;
+    }
+    .btn-dark:hover { background: var(--bark); }
+
+    /* =============================================
+       PROCESS
+    ============================================= */
+    .process { background: var(--cream); }
+
+    .process-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
       position: relative;
     }
-
-    .process-steps::before {
+    .process-grid::before {
       content: '';
       position: absolute;
-      top: 2.25rem;
-      right: 1.5rem;
-      left: 1.5rem;
+      top: 26px;
+      right: 10%;
+      left: 10%;
       height: 1px;
-      background: linear-gradient(to left, transparent, rgba(184, 135, 58, 0.35), transparent);
+      background: linear-gradient(to left, transparent, rgba(184,135,58,0.28), transparent);
     }
 
-    .process-step {
-      text-align: center;
-      padding-top: 1rem;
-    }
+    .proc-step { text-align: center; }
 
-    .step-number {
-      width: 48px;
-      height: 48px;
-      background: var(--gold);
-      color: white;
+    .proc-num {
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--bronze);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin: 0 auto 1.25rem;
+      font-family: var(--font-deco);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--bronze);
+      margin: 0 auto 1.5rem;
+      background: var(--cream);
       position: relative;
       z-index: 1;
+      transition: background 0.25s ease, color 0.25s ease;
     }
+    .proc-step:hover .proc-num { background: var(--bronze); color: white; }
 
-    .step-title {
+    .proc-title {
       font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--cream);
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: var(--charcoal);
       margin-bottom: 0.5rem;
     }
-
-    .step-desc {
-      font-size: 0.88rem;
-      color: rgba(251, 246, 238, 0.6);
-      line-height: 1.75;
+    .proc-desc {
+      font-size: 0.84rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      line-height: 1.8;
     }
 
     /* =============================================
-       TESTIMONIALS SECTION
+       TESTIMONIALS
     ============================================= */
-    .testimonials {
-      background: var(--warm-white);
-    }
+    .testimonials { background: var(--sand-50); }
 
-    .testimonials-grid {
+    .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
 
-    .testimonial-card {
-      background: var(--cream);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      border: 1px solid var(--sand);
-      position: relative;
+    .testi-card {
+      background: rgba(255,255,255,0.62);
+      border: 1px solid var(--sand-100);
+      border-radius: 2px;
+      padding: 2.25rem 2rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .testi-card:hover {
+      border-color: rgba(184,135,58,0.22);
+      box-shadow: 0 8px 30px rgba(58,34,21,0.07);
     }
 
-    .testimonial-quote-mark {
-      font-family: var(--font-display);
-      font-size: 4rem;
-      line-height: 0.8;
-      color: var(--sand);
-      margin-bottom: 0.75rem;
-      display: block;
+    .testi-stars {
+      letter-spacing: 2px;
+      color: var(--bronze);
+      font-size: 0.82rem;
+      margin-bottom: 1.25rem;
     }
 
-    .testimonial-text {
+    .testi-text {
+      font-family: var(--font-deco);
       font-size: 0.97rem;
-      color: var(--text-soft);
-      line-height: 1.85;
-      margin-bottom: 1.5rem;
+      font-weight: 300;
       font-style: italic;
+      color: var(--charcoal-lt);
+      line-height: 1.9;
+      margin-bottom: 1.75rem;
     }
 
-    .testimonial-author {
+    .testi-author {
       display: flex;
       align-items: center;
       gap: 0.75rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--sand-100);
     }
 
-    .testimonial-avatar {
-      width: 40px;
-      height: 40px;
-      background: var(--sand);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--bark);
-      flex-shrink: 0;
-    }
-
-    .testimonial-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--bark);
-    }
-
-    .testimonial-role {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    .testimonial-stars {
-      color: var(--gold);
-      font-size: 0.85rem;
-      letter-spacing: 1px;
-      margin-bottom: 0.75rem;
-    }
-
-    /* =============================================
-       CONTACT SECTION
-    ============================================= */
-    .contact {
-      background: var(--cream);
-    }
-
-    .contact-inner {
-      background: var(--soil);
-      border-radius: var(--radius-lg);
-      padding: 4rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-inner::before {
-      content: '';
-      position: absolute;
-      top: -60px; left: -60px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      border: 1px solid rgba(184, 135, 58, 0.15);
-      pointer-events: none;
-    }
-
-    .contact-inner::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; right: -80px;
-      width: 400px;
-      height: 400px;
-      border-radius: 50%;
-      border: 1px solid rgba(107, 124, 90, 0.12);
-      pointer-events: none;
-    }
-
-    .contact-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-content .section-title {
-      color: var(--cream);
-      margin-bottom: 1rem;
-    }
-
-    .contact-content p {
-      color: rgba(251, 246, 238, 0.65);
-      line-height: 1.8;
-      margin-bottom: 2rem;
-    }
-
-    .contact-info-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: rgba(251, 246, 238, 0.75);
-      font-size: 0.95rem;
-    }
-
-    .contact-info-icon {
+    .testi-avatar {
       width: 36px;
       height: 36px;
-      background: rgba(184, 135, 58, 0.2);
       border-radius: 50%;
+      background: linear-gradient(135deg, var(--sand-100), var(--bronze-light));
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-weight: 500;
+      font-size: 0.88rem;
+      color: var(--soil);
       flex-shrink: 0;
     }
 
-    .contact-form-side {
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-cta-box {
-      background: rgba(251, 246, 238, 0.07);
-      border: 1px solid rgba(251, 246, 238, 0.12);
-      border-radius: var(--radius);
-      padding: 2rem;
-    }
-
-    .contact-cta-box h3 {
-      font-family: var(--font-display);
-      font-size: 1.3rem;
-      font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.75rem;
-    }
-
-    .contact-cta-box p {
-      color: rgba(251, 246, 238, 0.6);
-      font-size: 0.9rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn-whatsapp {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: #25D366;
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 1.05rem;
-      width: 100%;
-      justify-content: center;
-      transition: background var(--transition), transform 0.2s, box-shadow var(--transition);
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
-    }
-
-    .btn-whatsapp:hover {
-      background: #1ebe5a;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
-    }
-
-    .btn-whatsapp svg {
-      width: 22px;
-      height: 22px;
-      fill: white;
-      flex-shrink: 0;
-    }
-
-    .contact-note {
-      text-align: center;
-      margin-top: 1rem;
-      font-size: 0.82rem;
-      color: rgba(251, 246, 238, 0.4);
-    }
+    .testi-name { font-weight: 500; font-size: 0.84rem; color: var(--bark); }
+    .testi-role { font-size: 0.74rem; font-weight: 300; color: var(--muted); }
 
     /* =============================================
-       FLOATING WHATSAPP BUTTON
+       FAQ
     ============================================= */
-    .float-whatsapp {
-      position: fixed;
-      bottom: 2rem;
-      left: 2rem;
-      z-index: 500;
-      width: 58px;
-      height: 58px;
-      background: #25D366;
-      border-radius: 50%;
+    .faq { background: var(--cream); }
+
+    .faq-list {
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .faq-item {
+      border: 1px solid var(--sand-100);
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.25s ease;
+    }
+    .faq-item:hover       { border-color: rgba(184,135,58,0.28); }
+    .faq-item.open        { border-color: rgba(184,135,58,0.48); }
+
+    .faq-q {
       display: flex;
       align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
-      transition: transform 0.2s, box-shadow var(--transition);
+      justify-content: space-between;
+      padding: 1.2rem 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--charcoal);
+      user-select: none;
+      gap: 1rem;
       cursor: pointer;
     }
 
-    .float-whatsapp:hover {
-      transform: scale(1.1);
-      box-shadow: 0 10px 40px rgba(37, 211, 102, 0.55);
+    .faq-ico {
+      width: 17px;
+      height: 17px;
+      color: var(--bronze);
+      flex-shrink: 0;
+      transition: transform 0.3s var(--ease);
+    }
+    .faq-item.open .faq-ico { transform: rotate(45deg); }
+
+    .faq-ans {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s var(--ease);
+    }
+    .faq-ans-inner {
+      padding: 0 1.5rem 1.25rem;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      line-height: 1.88;
+      border-top: 1px solid var(--sand-100);
+      padding-top: 1rem;
+    }
+    .faq-item.open .faq-ans { max-height: 400px; }
+
+    /* =============================================
+       CONTACT
+    ============================================= */
+    .contact { background: var(--sand-50); }
+
+    .contact-wrap {
+      max-width: 520px;
+      margin: 0 auto;
+      text-align: center;
     }
 
-    .float-whatsapp svg {
-      width: 28px;
-      height: 28px;
-      fill: white;
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 2rem 0 2.5rem;
+      align-items: center;
     }
-
-    .float-whatsapp::before {
-      content: '';
-      position: absolute;
-      inset: -6px;
-      border-radius: 50%;
-      background: rgba(37, 211, 102, 0.25);
-      animation: pulse-wa 2.5s ease-in-out infinite;
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--charcoal-lt);
     }
+    .contact-row svg { width: 15px; height: 15px; color: var(--bronze); flex-shrink: 0; }
 
-    @keyframes pulse-wa {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.35); opacity: 0; }
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--charcoal);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.25s ease;
+      cursor: pointer;
+    }
+    .btn-wa:hover { background: var(--bark); }
+    .btn-wa svg { width: 19px; height: 19px; fill: white; flex-shrink: 0; }
+
+    .contact-note {
+      margin-top: 0.85rem;
+      font-size: 0.76rem;
+      font-weight: 300;
+      color: var(--muted);
     }
 
     /* =============================================
@@ -997,9 +983,8 @@
     ============================================= */
     .footer {
       background: var(--soil);
-      padding: 2.5rem 0;
+      padding: 3rem 0;
     }
-
     .footer-inner {
       display: flex;
       align-items: center;
@@ -1007,214 +992,210 @@
       flex-wrap: wrap;
       gap: 1rem;
     }
-
     .footer-name {
       font-family: var(--font-display);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--gold-light);
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--bronze-light);
     }
-
-    .footer-tagline {
-      font-size: 0.85rem;
-      color: rgba(251, 246, 238, 0.45);
+    .footer-tag {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.3);
+      margin-top: 0.2rem;
+      letter-spacing: 0.05em;
     }
-
+    .footer-social {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .footer-social a {
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.38);
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+    .footer-social a:hover { border-color: rgba(184,135,58,0.4); color: var(--bronze-light); }
+    .footer-social svg { width: 13px; height: 13px; }
     .footer-copy {
-      font-size: 0.8rem;
-      color: rgba(251, 246, 238, 0.3);
+      font-size: 0.73rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.22);
     }
 
     /* =============================================
-       SCROLL REVEAL ANIMATION
+       FLOATING WHATSAPP
     ============================================= */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    .float-wa {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      z-index: 500;
+      width: 52px;
+      height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
-
-    .reveal.revealed {
-      opacity: 1;
-      transform: translateY(0);
+    .float-wa:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(37,211,102,0.52); }
+    .float-wa svg { width: 25px; height: 25px; fill: white; }
+    .float-wa::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.2);
+      animation: waRing 2.5s ease-in-out infinite;
     }
-
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
-    .reveal-delay-6 { transition-delay: 0.6s; }
+    @keyframes waRing {
+      0%,100% { transform:scale(1); opacity:0.8; }
+      50%     { transform:scale(1.35); opacity:0; }
+    }
 
     /* =============================================
        MOBILE MENU
     ============================================= */
-    .mobile-menu {
+    .mob-menu {
       position: fixed;
       top: 0;
       right: 0;
       width: 280px;
       height: 100vh;
-      background: var(--warm-white);
+      background: var(--cream);
       z-index: 2000;
       padding: 5rem 2rem 2rem;
       transform: translateX(100%);
-      transition: transform var(--transition);
-      box-shadow: -8px 0 40px rgba(58, 34, 21, 0.15);
+      transition: transform 0.35s var(--ease);
+      box-shadow: -4px 0 28px rgba(58,34,21,0.1);
     }
+    .mob-menu.open { transform: translateX(0); }
 
-    .mobile-menu.open {
-      transform: translateX(0);
-    }
-
-    .mobile-menu-overlay {
+    .mob-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(58, 34, 21, 0.5);
+      background: rgba(38,22,8,0.42);
       z-index: 1999;
       opacity: 0;
       pointer-events: none;
-      transition: opacity var(--transition);
+      transition: opacity 0.35s ease;
     }
+    .mob-overlay.open { opacity: 1; pointer-events: all; }
 
-    .mobile-menu-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-
-    .mobile-menu-close {
+    .mob-close {
       position: absolute;
       top: 1.5rem;
       left: 1.5rem;
-      width: 36px;
-      height: 36px;
+      width: 30px;
+      height: 30px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
       color: var(--bark);
+      font-size: 1.2rem;
     }
 
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-
-    .mobile-nav-links a {
+    .mob-nav { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+    .mob-nav a {
       display: block;
-      padding: 0.85rem 0;
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--text-soft);
-      border-bottom: 1px solid var(--sand);
-      transition: color var(--transition), padding-right var(--transition);
+      padding: 0.88rem 0;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: var(--charcoal-lt);
+      border-bottom: 1px solid var(--sand-100);
+      transition: color 0.25s ease;
     }
+    .mob-nav a:hover { color: var(--bronze); }
 
-    .mobile-nav-links a:hover {
-      color: var(--gold);
-      padding-right: 0.5rem;
-    }
-
-    .mobile-whatsapp {
+    .mob-wa {
       margin-top: 2rem;
       display: flex;
       align-items: center;
       gap: 0.6rem;
       background: #25D366;
       color: white;
-      padding: 0.85rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
+      padding: 0.8rem 1.5rem;
+      border-radius: 2px;
+      font-size: 0.76rem;
+      letter-spacing: 0.1em;
       justify-content: center;
+      font-weight: 400;
     }
+
+    /* =============================================
+       SECTION HEADER HELPER
+    ============================================= */
+    .sec-hdr { margin-bottom: 4rem; }
+    .sec-hdr-c { text-align: center; }
+    .sec-hdr-c .lead { margin: 0 auto; text-align: center; }
+    .sec-hdr-c .divider { margin: 1.5rem auto; }
+
+    /* =============================================
+       FOCUS & KEYBOARD
+    ============================================= */
+    :focus-visible { outline: 1px solid var(--bronze); outline-offset: 3px; }
 
     /* =============================================
        RESPONSIVE
     ============================================= */
     @media (max-width: 900px) {
+      :root { --section-py: 5.5rem; }
+
       .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      .hamburger { display: flex; }
 
-      .hero {
-        grid-template-columns: 1fr;
-      }
+      .about-grid,
+      .bach-grid { grid-template-columns: 1fr; gap: 3rem; }
 
-      .hero-image-side {
-        position: absolute;
-        inset: 0;
-        min-height: auto;
-        z-index: 0;
-      }
+      .about-img-accent { display: none; }
 
-      .hero-image-wrap img {
-        filter: brightness(0.35) contrast(1.1);
-      }
+      .services-grid { grid-template-columns: 1fr 1fr; }
 
-      .hero-image-overlay {
-        background: rgba(58, 34, 21, 0.5);
-      }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+      .process-grid::before { display: none; }
 
-      .hero-content {
-        position: relative;
-        z-index: 2;
-        padding: 8rem 1.5rem 4rem;
-        max-width: 100%;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
-
-      .about-img-accent {
-        display: none;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 1.5rem;
-      }
-
-      .process-steps::before { display: none; }
-
-      .testimonials-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 2.5rem;
-      }
+      .testi-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 600px) {
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
+      :root { --section-py: 4.5rem; }
 
-      .process-steps {
-        grid-template-columns: 1fr;
-      }
+      .services-grid,
+      .process-grid { grid-template-columns: 1fr; }
 
-      .hero-stats {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
+      .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
+      .hero-title { font-size: clamp(2.4rem, 10vw, 4rem); }
+    }
 
-      .contact-inner {
-        padding: 1.75rem;
+    /* =============================================
+       REDUCED MOTION
+    ============================================= */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
-
-      .section {
-        padding: 4rem 0;
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .hero-badge, .hero-eyebrow, .hero-title, .hero-divider,
+      .hero-sub, .hero-actions, .hero-stats {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
       }
     }
   </style>
@@ -1230,139 +1211,137 @@
     <ul class="nav-links">
       <li><a href="#about">אודות</a></li>
       <li><a href="#services">טיפולים</a></li>
+      <li><a href="#bach">פרחי באך</a></li>
       <li><a href="#process">תהליך</a></li>
       <li><a href="#testimonials">המלצות</a></li>
+      <li><a href="#faq">שאלות</a></li>
       <li><a href="#contact" class="nav-cta">לתיאום פגישה</a></li>
     </ul>
 
-    <div class="nav-hamburger" id="hamburger" aria-label="פתח תפריט">
+    <div class="hamburger" id="hamburger" aria-label="פתח תפריט">
       <span></span><span></span><span></span>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
-  <div class="mobile-menu-overlay" id="mobileOverlay"></div>
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu-close" id="mobileClose" aria-label="סגור">✕</button>
-    <ul class="mobile-nav-links">
-      <li><a href="#about" class="mobile-link">אודות</a></li>
-      <li><a href="#services" class="mobile-link">טיפולים</a></li>
-      <li><a href="#process" class="mobile-link">תהליך הטיפול</a></li>
-      <li><a href="#testimonials" class="mobile-link">המלצות</a></li>
-      <li><a href="#contact" class="mobile-link">יצירת קשר</a></li>
+  <!-- Mobile -->
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <div class="mob-menu" id="mobMenu">
+    <button class="mob-close" id="mobClose" aria-label="סגור">✕</button>
+    <ul class="mob-nav">
+      <li><a href="#about"        class="mob-link">אודות</a></li>
+      <li><a href="#services"     class="mob-link">טיפולים</a></li>
+      <li><a href="#bach"         class="mob-link">פרחי באך</a></li>
+      <li><a href="#process"      class="mob-link">תהליך הטיפול</a></li>
+      <li><a href="#testimonials" class="mob-link">המלצות</a></li>
+      <li><a href="#faq"          class="mob-link">שאלות נפוצות</a></li>
+      <li><a href="#contact"      class="mob-link">יצירת קשר</a></li>
     </ul>
-    <a href="https://wa.me/972XXXXXXXXX" class="mobile-whatsapp">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-      דברו עם יפית בוואטסאפ
+    <a href="https://wa.me/972XXXXXXXXX" class="mob-wa">
+      <svg viewBox="0 0 24 24" width="17" height="17" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      דברו עם יפית
     </a>
   </div>
 
   <!-- =============================================
-       HERO
+       HERO — full-screen
   ============================================= -->
   <section class="hero" id="home">
-    <div class="hero-bg"></div>
+    <div class="hero-bg">
+      <img src="assets/images/yafit-3.jpeg" alt="יפית — מטפלת הוליסטית" />
+    </div>
 
     <div class="hero-content">
-      <span class="hero-label">מטפלת הוליסטית גוף-נפש | תל אביב</span>
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        שיחת היכרות ראשונה — חינם לגמרי
+      </div>
+
+      <span class="hero-eyebrow">מטפלת הוליסטית גוף-נפש &middot; תל אביב</span>
 
       <h1 class="hero-title">
         הגוף שלנו מדבר —<br />
-        הגיע הזמן<br />
-        <em>להקשיב לו</em>
+        הגיע הזמן <em>להקשיב לו</em>
       </h1>
 
-      <p class="hero-subtitle">
-        אני מטפלת באנשים שמתמודדים עם כאב פיזי, סטרס, עומס רגשי
-        או תקיעות — דרך שיחה, מגע, אנרגיה וכלים מעולם הגוף-נפש.
+      <div class="hero-divider"></div>
+
+      <p class="hero-sub">
+        מלווה אנשים עם כאב פיזי, סטרס, עומס רגשי ותקיעות<br />
+        דרך שיחה, מגע, אנרגיה וכלים מעולם הגוף-נפש.
       </p>
 
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">לתיאום פגישה ראשונה</a>
-        <a href="#about" class="btn-secondary">הכירי את יפית ←</a>
+        <a href="#contact" class="btn-hero-primary">לתיאום פגישה ראשונה</a>
+        <a href="#about"   class="btn-hero-ghost">הכירי את יפית</a>
       </div>
 
       <div class="hero-stats">
-        <div>
-          <div class="hero-stat-number">15+</div>
-          <div class="hero-stat-label">שנות ניסיון</div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">15+</span>
+          <span class="hero-stat-lbl">שנות ניסיון</span>
         </div>
-        <div>
-          <div class="hero-stat-number">6</div>
-          <div class="hero-stat-label">שיטות טיפול</div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">6</span>
+          <span class="hero-stat-lbl">שיטות טיפול</span>
         </div>
-        <div>
-          <div class="hero-stat-number">100%</div>
-          <div class="hero-stat-label">מותאם אישית</div>
+        <div class="hero-stat">
+          <span class="hero-stat-num">100%</span>
+          <span class="hero-stat-lbl">מותאם אישית</span>
         </div>
       </div>
     </div>
 
-    <div class="hero-image-side">
-      <div class="hero-image-wrap">
-        <img src="assets/images/yafit-3.jpeg" alt="יפית — מטפלת הוליסטית" />
-        <div class="hero-image-overlay"></div>
-      </div>
-      <div class="hero-decor-circle"></div>
-    </div>
-
-    <div class="hero-scroll-hint">
-      <span>גלול למטה</span>
-      <div class="scroll-arrow"></div>
-    </div>
+    <a href="#about" class="hero-scroll">
+      <span>גלול</span>
+      <div class="hero-scroll-line"></div>
+    </a>
   </section>
 
-  <!-- Wave divider -->
-  <div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#FEFAF3"/>
-    </svg>
-  </div>
-
   <!-- =============================================
-       ABOUT SECTION
+       ABOUT
   ============================================= -->
   <section class="section about" id="about">
     <div class="container">
       <div class="about-grid">
 
-        <div class="about-image-wrap reveal">
+        <div class="about-img-wrap reveal">
           <img src="assets/images/yafit-4.jpeg" alt="יפית בסביבתה הטבעית" class="about-img-main" />
           <img src="assets/images/yafit-1.jpeg" alt="יפית" class="about-img-accent" />
-          <div class="about-decor"></div>
+          <div class="about-frame"></div>
         </div>
 
-        <div class="about-content">
-          <div class="section-header reveal">
-            <p class="section-label">אודות יפית</p>
-            <h2 class="section-title">המסע שלי<br />מהגוף אל הנפש</h2>
+        <div>
+          <div class="reveal">
+            <span class="eyebrow">אודות יפית</span>
+            <h2 class="h2">המסע שלי<br />מהגוף אל הנפש</h2>
+            <div class="divider"></div>
           </div>
 
-          <p class="about-text reveal reveal-delay-1">
+          <p class="body-text reveal d1">
             המסע המקצועי שלי התחיל דרך <strong>הגוף</strong>. כרקדנית במשך שנים, הגוף תמיד היה עבורי שפה. בהמשך ליוויתי אנשים במשך יותר מ-15 שנה דרך טיפול בכאב פיזי, מתחים ופציעות, ופיתחתי הבנה עמוקה של הדרך שבה הגוף מחזיק טראומה, עומס רגשי ודפוסים עמוקים.
           </p>
 
-          <p class="about-text reveal reveal-delay-2">
+          <p class="body-text reveal d2">
             עם השנים הבנתי שלא תמיד מספיק לטפל רק בגוף. התחלתי להעמיק בעולמות הנפש, התודעה והאנרגיה — ולמדתי כלים כמו <strong>רייקי, מדיטציה, NLP, סאונד הילינג</strong> ודמיון מודרך.
           </p>
 
-          <blockquote class="about-highlight reveal reveal-delay-3">
+          <blockquote class="pull-quote reveal d3">
             "היום אני משלבת בין שני העולמות — גוף ונפש — כדי לעזור לאנשים ליצור שינוי עמוק ואמיתי."
           </blockquote>
 
-          <p class="about-text reveal reveal-delay-3">
+          <p class="body-text reveal d3">
             בקליניקה שלי בתל אביב אני מלווה אנשים שמתמודדים עם סטרס, עומס רגשי, חרדה, תקיעות או תחושת חוסר איזון. <strong>כל מפגש נראה אחרת</strong> — בהתאם למה שאת/ה צריך באותו רגע.
           </p>
 
-          <div class="about-tools reveal reveal-delay-4">
-            <span class="tool-tag">רייקי</span>
-            <span class="tool-tag">סאונד הילינג</span>
-            <span class="tool-tag">מדיטציה</span>
-            <span class="tool-tag">דמיון מודרך</span>
-            <span class="tool-tag">NLP</span>
-            <span class="tool-tag">שיחה מעמיקה</span>
-            <span class="tool-tag">עבודה אנרגטית</span>
-            <span class="tool-tag">תת-מודע</span>
+          <div class="tag-list reveal d4">
+            <span class="tag">רייקי</span>
+            <span class="tag">סאונד הילינג</span>
+            <span class="tag">מדיטציה</span>
+            <span class="tag">דמיון מודרך</span>
+            <span class="tag">NLP</span>
+            <span class="tag">שיחה מעמיקה</span>
+            <span class="tag">עבודה אנרגטית</span>
+            <span class="tag">תת-מודע</span>
           </div>
         </div>
 
@@ -1371,52 +1350,90 @@
   </section>
 
   <!-- =============================================
-       SERVICES SECTION
+       SERVICES
   ============================================= -->
   <section class="section services" id="services">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label reveal">שיטות הטיפול</p>
-        <h2 class="section-title reveal">כלים ממגוון עולמות,<br />מותאמים אישית לך</h2>
-        <p class="section-desc reveal reveal-delay-1">כל מפגש מורכב מהכלים שמתאימים לך — לא תבנית קבועה, אלא מענה אמיתי לצורך של אותו רגע.</p>
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="eyebrow reveal">שיטות הטיפול</span>
+        <h2 class="h2 reveal">כלים ממגוון עולמות,<br />מותאמים אישית לך</h2>
+        <div class="divider divider-c reveal d1"></div>
+        <p class="lead reveal d2">כל מפגש מורכב מהכלים שמתאימים לך — לא תבנית קבועה, אלא מענה אמיתי לצורך של אותו רגע.</p>
       </div>
 
       <div class="services-grid">
 
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-icon">🌿</div>
-          <h3 class="service-name">שיחה מעמיקה</h3>
-          <p class="service-desc">האבחון מתחיל בהקשבה אמיתית. דרך שיחה נגלה יחד מה הגוף מנסה להגיד, ומה עומד בבסיס הקושי.</p>
+        <div class="svc-card reveal d1">
+          <div class="svc-head svc-sage">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">שיחה מעמיקה</h3>
+            <p class="svc-desc">האבחון מתחיל בהקשבה אמיתית. דרך שיחה נגלה יחד מה הגוף מנסה להגיד, ומה עומד בבסיס הקושי.</p>
+          </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon">✨</div>
-          <h3 class="service-name">רייקי</h3>
-          <p class="service-desc">טיפול אנרגטי מגע עדין שמסייע לאיזון מרכזי האנרגיה בגוף, שחרור חסימות ויצירת זרימה פנימית חופשית.</p>
+        <div class="svc-card reveal d2">
+          <div class="svc-head svc-gold">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">רייקי</h3>
+            <p class="svc-desc">טיפול אנרגטי מגע עדין שמסייע לאיזון מרכזי האנרגיה בגוף, שחרור חסימות ויצירת זרימה פנימית חופשית.</p>
+          </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon">🎵</div>
-          <h3 class="service-name">סאונד הילינג</h3>
-          <p class="service-desc">טיפול בקערות טיבטיות וצלילים מרפאים שמעבירים את הגוף למצב מדיטטיבי עמוק ומשחררים עומסים פיזיים ורגשיים.</p>
+        <div class="svc-card reveal d3">
+          <div class="svc-head svc-clay">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">סאונד הילינג</h3>
+            <p class="svc-desc">טיפול בקערות טיבטיות וצלילים מרפאים שמעבירים את הגוף למצב מדיטטיבי עמוק ומשחררים עומסים פיזיים ורגשיים.</p>
+          </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-icon">🧘</div>
-          <h3 class="service-name">מדיטציה</h3>
-          <p class="service-desc">הנחיית מדיטציות מותאמות אישית לשחרור לחץ, השקטת המוח ויצירת מרחב פנימי של שקט וביטחון.</p>
+        <div class="svc-card reveal d1">
+          <div class="svc-head svc-sky">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2m7.6-7.4A2 2 0 1 1 11 8H2m10.6 11.4A2 2 0 1 0 14 16H2"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">מדיטציה</h3>
+            <p class="svc-desc">הנחיית מדיטציות מותאמות אישית לשחרור לחץ, השקטת המוח ויצירת מרחב פנימי של שקט וביטחון.</p>
+          </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon">🌙</div>
-          <h3 class="service-name">דמיון מודרך</h3>
-          <p class="service-desc">עבודה עם התת-מודע דרך דמיון — כלי עוצמתי לשחרור פחדים, עיבוד רגשות ויצירת שינוי דפוסים עמוק.</p>
+        <div class="svc-card reveal d2">
+          <div class="svc-head svc-plum">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">דמיון מודרך</h3>
+            <p class="svc-desc">עבודה עם התת-מודע דרך דמיון — כלי עוצמתי לשחרור פחדים, עיבוד רגשות ויצירת שינוי דפוסים עמוק.</p>
+          </div>
         </div>
 
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon">🔑</div>
-          <h3 class="service-name">NLP + תת-מודע</h3>
-          <p class="service-desc">שיטות מעולם ה-NLP לשינוי מהיר ויעיל של דפוסי חשיבה, תגובות רגשיות ואמונות מגבילות מהתת-מודע.</p>
+        <div class="svc-card reveal d3">
+          <div class="svc-head svc-amber">
+            <div class="svc-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+            </div>
+          </div>
+          <div class="svc-body">
+            <h3 class="svc-name">NLP + תת-מודע</h3>
+            <p class="svc-desc">שיטות מעולם ה-NLP לשינוי מהיר ויעיל של דפוסי חשיבה, תגובות רגשיות ואמונות מגבילות מהתת-מודע.</p>
+          </div>
         </div>
 
       </div>
@@ -1424,43 +1441,105 @@
   </section>
 
   <!-- =============================================
-       PROCESS SECTION
+       BACH FLOWERS
+  ============================================= -->
+  <section class="section bach" id="bach">
+    <div class="container">
+      <div class="bach-grid">
+
+        <div>
+          <div class="reveal">
+            <span class="eyebrow">כלי נוסף בקליניקה</span>
+            <h2 class="h2">תמיכה טבעית<br />באמצעות פרחי באך</h2>
+            <div class="divider"></div>
+          </div>
+
+          <p class="body-text reveal d1">
+            כלי נוסף ומשמעותי בקליניקה הוא הטיפול בתמציות פרחי באך — שיטה טבעית, עדינה ובטוחה לריפוי רגשי. התמציות אינן <strong>"מכריחות" שינוי</strong>, אלא פותחות מרחב שקט שעוזר לשחרר מתחים, לווסת רגשות ולמצוא מחדש את האיזון והביטחון הפנימי.
+          </p>
+
+          <div class="bach-points">
+            <div class="bach-pt reveal d2">
+              <div class="bach-pt-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <div>
+                <div class="bach-pt-title">כחלק מהתהליך הליווי הרגשי</div>
+                <div class="bach-pt-desc">שילוב התמציות בתוך פגישות הטיפול בקליניקה להעצמת התוצאות.</div>
+              </div>
+            </div>
+
+            <div class="bach-pt reveal d3">
+              <div class="bach-pt-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+              </div>
+              <div>
+                <div class="bach-pt-title">כטיפול ממוקד</div>
+                <div class="bach-pt-desc">מפגשים ייעודיים לאבחון והתאמה אישית של תמצית, כמענה נקודתי לקושי ספציפי.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bach-img-wrap reveal d1">
+          <img src="assets/images/bach-flowers.png" alt="תמציות פרחי באך — שיטה טבעית לריפוי רגשי" />
+          <div class="bach-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+            שיטה טבעית ובטוחה
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       CTA STRIP
+  ============================================= -->
+  <section class="cta-strip">
+    <div class="cta-strip-inner reveal">
+      <h3>מוכנים לקחת צעד ראשון?</h3>
+      <p>שיחת ההיכרות קצרה, חינמית, וללא התחייבות — רק שיחה אמיתית.</p>
+      <a href="#contact" class="btn btn-bronze">לתיאום שיחת היכרות</a>
+    </div>
+  </section>
+
+  <!-- =============================================
+       PROCESS
   ============================================= -->
   <section class="section process" id="process">
     <div class="container">
-      <div class="section-header" style="text-align:center; max-width:600px; margin:0 auto 3.5rem;">
-        <p class="section-label reveal">איך עובד הטיפול</p>
-        <h2 class="section-title reveal">מה לצפות מהמסע יחד</h2>
-        <p class="section-desc reveal reveal-delay-1" style="margin:0 auto;">כל תהליך מתחיל בהקשבה. אני לא עובדת לפי תבנית — אלא לפי מה שאת/ה צריכים באמת.</p>
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="eyebrow reveal">איך עובד הטיפול</span>
+        <h2 class="h2 reveal">מה לצפות מהמסע יחד</h2>
+        <div class="divider divider-c reveal d1"></div>
+        <p class="lead reveal d2">כל תהליך מתחיל בהקשבה. אני לא עובדת לפי תבנית — אלא לפי מה שאת/ה צריכים באמת.</p>
       </div>
 
-      <div class="process-steps">
-
-        <div class="process-step reveal reveal-delay-1">
-          <div class="step-number">1</div>
-          <h3 class="step-title">שיחת היכרות</h3>
-          <p class="step-desc">מפגש ראשון קצר (חינם) שבו נדבר על מה שמביא אותך, ואבין מה מתאים לך.</p>
+      <div class="process-grid">
+        <div class="proc-step reveal d1">
+          <div class="proc-num">1</div>
+          <h3 class="proc-title">שיחת היכרות</h3>
+          <p class="proc-desc">מפגש ראשון קצר (חינם) שבו נדבר על מה שמביא אותך, ואבין מה מתאים לך.</p>
         </div>
-
-        <div class="process-step reveal reveal-delay-2">
-          <div class="step-number">2</div>
-          <h3 class="step-title">אבחון מעמיק</h3>
-          <p class="step-desc">דרך שיחה והקשבה לגוף, נזהה את שורש הקושי — לא רק את הסימפטום.</p>
+        <div class="proc-step reveal d2">
+          <div class="proc-num">2</div>
+          <h3 class="proc-title">אבחון מעמיק</h3>
+          <p class="proc-desc">דרך שיחה והקשבה לגוף, נזהה את שורש הקושי — לא רק את הסימפטום.</p>
         </div>
-
-        <div class="process-step reveal reveal-delay-3">
-          <div class="step-number">3</div>
-          <h3 class="step-title">טיפול משולב</h3>
-          <p class="step-desc">כל מפגש מורכב מהכלים שמתאימים לך — רייקי, שיחה, סאונד, מדיטציה ועוד.</p>
+        <div class="proc-step reveal d3">
+          <div class="proc-num">3</div>
+          <h3 class="proc-title">טיפול משולב</h3>
+          <p class="proc-desc">כל מפגש מורכב מהכלים שמתאימים לך — רייקי, שיחה, סאונד, מדיטציה ועוד.</p>
         </div>
-
-        <div class="process-step reveal reveal-delay-4">
-          <div class="step-number">4</div>
-          <h3 class="step-title">שינוי עמוק</h3>
-          <p class="step-desc">עם הזמן תרגישי/תרגיש שינוי אמיתי — פחות עומס, יותר חיבור לעצמך.</p>
+        <div class="proc-step reveal d4">
+          <div class="proc-num">4</div>
+          <h3 class="proc-title">שינוי עמוק</h3>
+          <p class="proc-desc">עם הזמן תרגישי/תרגיש שינוי אמיתי — פחות עומס, יותר חיבור לעצמך.</p>
         </div>
-
       </div>
+
     </div>
   </section>
 
@@ -1469,48 +1548,47 @@
   ============================================= -->
   <section class="section testimonials" id="testimonials">
     <div class="container">
-      <div class="section-header" style="text-align:center; max-width:560px; margin:0 auto 3.5rem;">
-        <p class="section-label reveal">מה אומרים</p>
-        <h2 class="section-title reveal">הסיפורים של אנשים<br />שעברו את המסע</h2>
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="eyebrow reveal">מה אומרים</span>
+        <h2 class="h2 reveal">הסיפורים של אנשים<br />שעברו את המסע</h2>
+        <div class="divider divider-c reveal d1"></div>
       </div>
 
-      <div class="testimonials-grid">
+      <div class="testi-grid">
 
-        <div class="testimonial-card reveal reveal-delay-1">
-          <div class="testimonial-stars">★★★★★</div>
-          <span class="testimonial-quote-mark">"</span>
-          <p class="testimonial-text">הגעתי ליפית עם כאבי גב כרוניים שרופאים לא הצליחו לפתור. אחרי 3 מפגשים הרגשתי לראשונה בשנים שינוי אמיתי — לא רק בגוף, אלא גם בתוכי.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">מ</div>
+        <div class="testi-card reveal d1">
+          <div class="testi-stars" aria-label="5 מתוך 5 כוכבים" role="img">★★★★★</div>
+          <p class="testi-text">הגעתי ליפית עם כאבי גב כרוניים שרופאים לא הצליחו לפתור. אחרי 3 מפגשים הרגשתי לראשונה בשנים שינוי אמיתי — לא רק בגוף, אלא גם בתוכי.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">מ</div>
             <div>
-              <div class="testimonial-name">מיכל ל.</div>
-              <div class="testimonial-role">מטופלת, תל אביב</div>
+              <div class="testi-name">מיכל ל.</div>
+              <div class="testi-role">מטופלת, תל אביב</div>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card reveal reveal-delay-2">
-          <div class="testimonial-stars">★★★★★</div>
-          <span class="testimonial-quote-mark">"</span>
-          <p class="testimonial-text">חיפשתי מישהי שתבין גם את הגוף וגם את הנפש. יפית עשתה את זה בדיוק — הרגשתי שהיא רואה אותי בשלמות, לא רק את "הבעיה". תהליך שינה חיים.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">ד</div>
+        <div class="testi-card reveal d2">
+          <div class="testi-stars" aria-label="5 מתוך 5 כוכבים" role="img">★★★★★</div>
+          <p class="testi-text">חיפשתי מישהי שתבין גם את הגוף וגם את הנפש. יפית עשתה את זה בדיוק — הרגשתי שהיא רואה אותי בשלמות, לא רק את "הבעיה". תהליך שינה חיים.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">ד</div>
             <div>
-              <div class="testimonial-name">דנה ר.</div>
-              <div class="testimonial-role">מטופלת, רמת גן</div>
+              <div class="testi-name">דנה ר.</div>
+              <div class="testi-role">מטופלת, רמת גן</div>
             </div>
           </div>
         </div>
 
-        <div class="testimonial-card reveal reveal-delay-3">
-          <div class="testimonial-stars">★★★★★</div>
-          <span class="testimonial-quote-mark">"</span>
-          <p class="testimonial-text">הגעתי בתקופה של סטרס גדול מאוד. הסאונד הילינג אצל יפית היה חוויה שאי אפשר לתאר במילים. יצאתי רגועה, נקייה. ממליצה לכל אחת.</p>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar">נ</div>
+        <div class="testi-card reveal d3">
+          <div class="testi-stars" aria-label="5 מתוך 5 כוכבים" role="img">★★★★★</div>
+          <p class="testi-text">הגעתי בתקופה של סטרס גדול מאוד. הסאונד הילינג אצל יפית היה חוויה שאי אפשר לתאר במילים. יצאתי רגועה, נקייה. ממליצה לכל אחת.</p>
+          <div class="testi-author">
+            <div class="testi-avatar">נ</div>
             <div>
-              <div class="testimonial-name">נועה ש.</div>
-              <div class="testimonial-role">מטופלת, הרצליה</div>
+              <div class="testi-name">נועה ש.</div>
+              <div class="testi-role">מטופלת, הרצליה</div>
             </div>
           </div>
         </div>
@@ -1520,44 +1598,101 @@
   </section>
 
   <!-- =============================================
-       CONTACT SECTION
+       FAQ
+  ============================================= -->
+  <section class="section faq" id="faq">
+    <div class="container">
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="eyebrow reveal">שאלות נפוצות</span>
+        <h2 class="h2 reveal">תשובות לפני שמתחילים</h2>
+        <div class="divider divider-c reveal d1"></div>
+      </div>
+
+      <div class="faq-list">
+
+        <div class="faq-item reveal d1">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+            <span>כמה מפגשים צריך?</span>
+            <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="faq-ans">
+            <div class="faq-ans-inner">כל אדם שונה. יש מי שמרגיש שינוי משמעותי כבר אחרי 2–3 מפגשים, ויש תהליכים שלוקחים יותר זמן. בשיחת ההיכרות נדבר על ציפיות ריאליות ועל מה שמתאים לך.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal d2">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+            <span>מה קורה בפגישה הראשונה?</span>
+            <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="faq-ans">
+            <div class="faq-ans-inner">שיחת היכרות קצרה של כ-20 דקות — בלי עלות ובלי התחייבות. אנחנו מדברים, אני מקשיבה, ומחליטים יחד אם יש התאמה ומה הצעד הבא.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal d3">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+            <span>האם הטיפול מתאים גם לגברים?</span>
+            <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="faq-ans">
+            <div class="faq-ans-inner">בהחלט. אני מטפלת בגברים ונשים כאחד. הגוף-נפש אינו מבחין במגדר — כולם מגיעים עם עומסים, דפוסים ורצון לשינוי.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal d4">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+            <span>מה ההבדל בין רייקי לסאונד הילינג?</span>
+            <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="faq-ans">
+            <div class="faq-ans-inner">רייקי עובד עם אנרגיית הגוף דרך מגע עדין — מאזן, מרפא ומשחרר חסימות. סאונד הילינג משתמש בתדרי קול (קערות טיבטיות, צינגשות) להרפיה עמוקה. לעיתים אני משלבת את שניהם באותו מפגש.</div>
+          </div>
+        </div>
+
+        <div class="faq-item reveal d5">
+          <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+            <span>האם הטיפול מוכר על ידי קופות חולים?</span>
+            <svg class="faq-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <div class="faq-ans">
+            <div class="faq-ans-inner">חלק מקופות החולים מחזירות חלק מעלות הטיפולים ההוליסטיים. מומלץ לבדוק ישירות מול הקופה שלך, מה מכוסה תחת "רפואה משלימה".</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       CONTACT
   ============================================= -->
   <section class="section contact" id="contact">
     <div class="container">
-      <div class="contact-inner">
+      <div class="contact-wrap reveal">
 
-        <div class="contact-content reveal">
-          <p class="section-label" style="margin-bottom:0.75rem;">צרו קשר</p>
-          <h2 class="section-title">מוכנים להתחיל<br />את המסע?</h2>
-          <p>אני כאן לכל שאלה. נדבר קצת, ונחליט יחד אם ואיך אני יכולה לעזור לך. המפגש הראשון הוא שיחת היכרות קצרה — בלי התחייבות.</p>
+        <span class="eyebrow">צרו קשר</span>
+        <h2 class="h2">מוכנים להתחיל<br />את המסע?</h2>
+        <div class="divider divider-c"></div>
+        <p class="lead" style="margin:0 auto; text-align:center;">אני כאן לכל שאלה. נדבר קצת, ונחליט יחד אם ואיך אני יכולה לעזור לך. המפגש הראשון הוא שיחת היכרות קצרה — בלי התחייבות.</p>
 
-          <ul class="contact-info-list">
-            <li class="contact-info-item">
-              <div class="contact-info-icon">📍</div>
-              <span>תל אביב</span>
-            </li>
-            <li class="contact-info-item">
-              <div class="contact-info-icon">📱</div>
-              <span>זמינה בוואטסאפ</span>
-            </li>
-            <li class="contact-info-item">
-              <div class="contact-info-icon">🕐</div>
-              <span>ראשון–חמישי, 09:00–20:00</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="contact-form-side reveal reveal-delay-2">
-          <div class="contact-cta-box">
-            <h3>שלחי/שלח הודעה ביוואטסאפ</h3>
-            <p>הדרך הכי פשוטה ומהירה להתחיל — כתבו לי בוואטסאפ ונקבע שיחת היכרות קצרה.</p>
-            <a href="https://wa.me/972XXXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8" target="_blank" class="btn-whatsapp">
-              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-              כתבי/כתוב לי בוואטסאפ
-            </a>
-            <p class="contact-note">בדרך כלל מגיבה תוך מספר שעות</p>
+        <div class="contact-info">
+          <div class="contact-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>תל אביב</span>
+          </div>
+          <div class="contact-row">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>ראשון–חמישי, 09:00–20:00</span>
           </div>
         </div>
+
+        <a href="https://wa.me/972XXXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8" target="_blank" class="btn-wa">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          כתבי/כתוב לי בוואטסאפ
+        </a>
+        <p class="contact-note">בדרך כלל מגיבה תוך מספר שעות</p>
 
       </div>
     </div>
@@ -1571,7 +1706,15 @@
       <div class="footer-inner">
         <div>
           <div class="footer-name">יפית</div>
-          <div class="footer-tagline">מטפלת הוליסטית גוף-נפש | תל אביב</div>
+          <div class="footer-tag">מטפלת הוליסטית גוף-נפש &middot; תל אביב</div>
+          <div class="footer-social" style="margin-top:0.75rem;">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="אינסטגרם">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/972XXXXXXXXX" target="_blank" rel="noopener" aria-label="וואטסאפ">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
         </div>
         <p class="footer-copy">© 2026 יפית. כל הזכויות שמורות.</p>
       </div>
@@ -1581,8 +1724,8 @@
   <!-- =============================================
        FLOATING WHATSAPP
   ============================================= -->
-  <a href="https://wa.me/972XXXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8" 
-     target="_blank" class="float-whatsapp" title="צרו קשר בוואטסאפ">
+  <a href="https://wa.me/972XXXXXXXXX?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8"
+     target="_blank" class="float-wa" title="צרו קשר בוואטסאפ">
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
   </a>
 
@@ -1590,57 +1733,66 @@
        JAVASCRIPT
   ============================================= -->
   <script>
-    // --- Navbar scroll effect ---
+    // Navbar scroll state
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }, { passive: true });
 
-    // --- Scroll reveal ---
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-          revealObserver.unobserve(entry.target);
+    // Scroll reveal via IntersectionObserver
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          observer.unobserve(e.target);
         }
       });
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    // Mobile menu
+    const hamburger   = document.getElementById('hamburger');
+    const mobMenu     = document.getElementById('mobMenu');
+    const mobOverlay  = document.getElementById('mobOverlay');
+    const mobClose    = document.getElementById('mobClose');
 
-    // --- Mobile Menu ---
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const mobileClose = document.getElementById('mobileClose');
-
-    function openMenu() {
-      mobileMenu.classList.add('open');
-      mobileOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      mobileOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+    function openMenu()  { mobMenu.classList.add('open');    mobOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { mobMenu.classList.remove('open'); mobOverlay.classList.remove('open'); document.body.style.overflow = '';       }
 
     hamburger.addEventListener('click', openMenu);
-    mobileClose.addEventListener('click', closeMenu);
-    mobileOverlay.addEventListener('click', closeMenu);
-    document.querySelectorAll('.mobile-link').forEach(link => {
-      link.addEventListener('click', closeMenu);
+    mobClose.addEventListener('click', closeMenu);
+    mobOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    // FAQ accordion — keyboard accessible
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-q');
+
+      function toggle() {
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(o => {
+          o.classList.remove('open');
+          o.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      }
+
+      btn.addEventListener('click', toggle);
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+      });
     });
 
-    // --- Smooth scroll offset for fixed nav ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
           e.preventDefault();
-          const offset = 80;
-          const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+          const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
