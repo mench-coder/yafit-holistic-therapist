@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יפית | מטפלת הוליסטית גוף-נפש</title>
+  <meta name="description" content="יפית — מטפלת הוליסטית גוף-נפש בתל אביב. שיחת היכרות ראשונה חינם — דברו איתי בווטסאפ." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #FBFBF9;
+      --mist:     #EEF1EC;
+      --sky:      #D8E4E2;
+      --sage:     #7E957F;
+      --sage-dk:  #54684F;
+      --ink:      #28302B;
+      --ink-soft: #76807A;
+      --line:     #E2E5DF;
+      --wa:       #22BC5B;
+      --f-display:'Frank Ruhl Libre', Georgia, serif;
+      --f-body:   'Assistant', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--ink);
+      direction: rtl;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1.4rem;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* faint horizon circle */
+    body::before {
+      content: '';
+      position: fixed;
+      width: 95vmin; height: 95vmin;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -58%);
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      width: 70vmin; height: 70vmin;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--mist), transparent 70%);
+      top: -20vmin; left: -20vmin;
+      pointer-events: none;
+    }
+
+    .wrap { width: 100%; max-width: 380px; text-align: center; position: relative; z-index: 1; }
+
+    .reveal { opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.22,0.61,0.36,1) forwards; }
+    .d1 { animation-delay: 0.15s; } .d2 { animation-delay: 0.3s; }
+    .d3 { animation-delay: 0.45s; } .d4 { animation-delay: 0.6s; }
+    .d5 { animation-delay: 0.75s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+    /* ---- serene circular photo ---- */
+    .photo-wrap { position: relative; width: 172px; height: 172px; margin: 0 auto 1.8rem; }
+    .photo-wrap::before {
+      content: '';
+      position: absolute; inset: -13px;
+      border-radius: 50%;
+      border: 1px solid var(--sage);
+      opacity: 0.35;
+    }
+    .photo-wrap::after {
+      content: '';
+      position: absolute; inset: -26px;
+      border-radius: 50%;
+      border: 1px dashed var(--line);
+      animation: spin 60s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .photo {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 18px 44px rgba(40,48,43,0.14);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+
+    .status {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--sage-dk);
+      margin-bottom: 1rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--wa);
+      box-shadow: 0 0 0 3px rgba(34,188,91,0.18);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    h1 {
+      font-family: var(--f-display);
+      font-weight: 300;
+      font-size: 2.6rem;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.7rem;
+    }
+    .sub {
+      font-size: 0.98rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 280px;
+      margin: 0 auto 1.9rem;
+    }
+    .sub b { font-weight: 600; color: var(--ink); }
+
+    /* breath line */
+    .breath { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 1.9rem; }
+    .breath span { width: 5px; height: 5px; border-radius: 50%; background: var(--sage); opacity: 0.4; animation: breathe 3.6s ease-in-out infinite; }
+    .breath span:nth-child(2) { animation-delay: 0.45s; }
+    .breath span:nth-child(3) { animation-delay: 0.9s; }
+    @keyframes breathe { 0%,100% { transform: scale(1); opacity: 0.35; } 50% { transform: scale(1.7); opacity: 0.9; } }
+
+    /* services as quiet list */
+    .list {
+      display: grid;
+      gap: 0.55rem;
+      margin-bottom: 2rem;
+      text-align: right;
+    }
+    .item {
+      display: flex; align-items: center; gap: 0.8rem;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.72rem 1rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .item:hover { border-color: var(--sage); transform: translateX(-2px); }
+    .item svg { width: 17px; height: 17px; stroke: var(--sage-dk); flex-shrink: 0; }
+    .item small { margin-right: auto; font-size: 0.78rem; font-weight: 400; color: var(--ink-soft); }
+
+    .btn-wa {
+      display: flex; align-items: center; justify-content: center; gap: 0.65rem;
+      width: 100%;
+      min-height: 58px;
+      background: var(--wa);
+      color: #fff;
+      font-size: 1.08rem; font-weight: 700;
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 12px 30px rgba(34,188,91,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      margin-bottom: 0.8rem;
+    }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(34,188,91,0.38); }
+    .btn-wa:active { transform: scale(0.98); }
+    .btn-wa svg { width: 22px; height: 22px; flex-shrink: 0; }
+
+    .btn-call {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%;
+      min-height: 50px;
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--sage-dk);
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 16px;
+      padding: 0.8rem 1.2rem;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .btn-call:hover { border-color: var(--sage); }
+    .btn-call svg { width: 17px; height: 17px; }
+
+    .foot { font-size: 0.82rem; color: var(--ink-soft); margin-top: 1.7rem; }
+    .site-link {
+      display: inline-block; margin-top: 0.7rem;
+      font-size: 0.82rem; font-weight: 600; color: var(--sage-dk);
+      border-bottom: 1px solid var(--sage);
+      padding-bottom: 1px; cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .site-link:hover { opacity: 0.7; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { animation-duration: 0.01s; }
+      .photo-wrap::after, .breath span, .status-dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+
+    <div class="photo-wrap reveal">
+      <div class="photo"><img src="assets/images/yafit-2.jpeg" alt="יפית — מטפלת הוליסטית גוף-נפש" /></div>
+    </div>
+
+    <div class="reveal d1">
+      <span class="status"><span class="status-dot"></span>זמינה לשיחת היכרות — חינם</span>
+      <h1>יפית</h1>
+      <p class="sub">
+        מטפלת הוליסטית גוף-נפש בתל אביב.<br />
+        <b>15 שנה</b> שאני עוזרת לאנשים לשחרר כאב, סטרס ועומס — בעדינות.
+      </p>
+    </div>
+
+    <div class="breath reveal d2"><span></span><span></span><span></span></div>
+
+    <div class="list reveal d3">
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        רייקי ועבודה אנרגטית
+        <small>איזון ושחרור</small>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+        סאונד הילינג
+        <small>קערות טיבטיות</small>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        מדיטציה ודמיון מודרך
+        <small>שקט פנימי</small>
+      </div>
+      <div class="item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        שיחה מעמיקה + NLP
+        <small>שינוי דפוסים</small>
+      </div>
+    </div>
+
+    <div class="reveal d4">
+      <a class="btn-wa" data-wa target="_blank" rel="noopener" href="#">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        דברו איתי בווטסאפ
+      </a>
+      <a class="btn-call" data-tel href="#">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        או בשיחת טלפון
+      </a>
+    </div>
+
+    <div class="reveal d5">
+      <p class="foot">קליניקה בתל אביב · עונה בדרך כלל תוך שעה</p>
+      <a class="site-link" href="index.html">לאתר המלא ←</a>
+    </div>
+
+  </main>
+
+  <script>
+    var PHONE = '972XXXXXXXXX';
+    var MSG = 'היי יפית, הגעתי דרך הכרטיס שלך ואשמח לשמוע עוד';
+    document.querySelectorAll('[data-wa]').forEach(function (el) {
+      el.href = 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(MSG);
+    });
+    document.querySelectorAll('[data-tel]').forEach(function (el) {
+      el.href = 'tel:+' + PHONE;
+    });
+  </script>
+</body>
+</html>
