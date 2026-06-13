@@ -1,0 +1,13 @@
+{
+  "name": "yaff-holistic-therapist",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Yafit — Holistic Body-Mind Therapist website (static one-pager, Hebrew RTL)",
+  "scripts": {
+    "dev": "node ./node_modules/http-server/bin/http-server -p 5500 -c-1 --cors",
+    "start": "node ./node_modules/http-server/bin/http-server -p 5500 -c-1 --cors"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
