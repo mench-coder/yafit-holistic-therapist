@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יפית | מטפלת הוליסטית גוף-נפש | תל אביב</title>
+  <meta name="description" content="יפית מוכתרי — מטפלת הוליסטית גוף-נפש בתל אביב. ליווי אישי המשלב NLP, רייקי, שיאצו, פרחי באך, הילינג ועבודה מודעת עם הגוף והרגש. למעלה מ-20 שנות ניסיון." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Frank+Ruhl+Libre:wght@300;400;500&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --linen:      #F7F3EC;
+      --linen-md:   #EDE6D7;
+      --linen-dk:   #E0D5C4;
+      --stone:      #C4B49C;
+      --taupe:      #9B8B6E;
+      --bark:       #4A3520;
+      --soil:       #2A1F0E;
+      --sage:       #6B7B5A;
+      --sage-lt:    #94A880;
+      --bronze:     #9B7A42;
+      --bronze-lt:  #C4A065;
+      --white:      #FDFCFA;
+
+      --f-display: 'Cormorant Garamond', Georgia, serif;
+      --f-serif:   'Frank Ruhl Libre', Georgia, serif;
+      --f-body:    'Assistant', Arial, sans-serif;
+
+      --max-w: 1140px;
+      --sec-py: 9rem;
+      --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--f-body);
+      background: var(--linen);
+      color: var(--soil);
+      direction: rtl;
+      text-align: right;
+      overflow-x: hidden;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-thumb { background: var(--stone); }
+    :focus-visible { outline: 1px solid var(--bronze); outline-offset: 3px; }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2.5rem; }
+    .section   { padding: var(--sec-py) 0; }
+
+    /* ─── TYPOGRAPHY HELPERS ─── */
+    .label {
+      display: block;
+      font-family: var(--f-body);
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      margin-bottom: 1.25rem;
+    }
+    .rule {
+      width: 48px; height: 1px;
+      background: linear-gradient(to left, transparent, var(--bronze), transparent);
+      margin: 1.5rem 0;
+    }
+    .rule-c { margin: 1.5rem auto; }
+
+    h1.display {
+      font-family: var(--f-display);
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      font-weight: 300;
+      color: var(--soil);
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+    }
+    h2.section-title {
+      font-family: var(--f-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--soil);
+      line-height: 1.15;
+    }
+    .lead {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--taupe);
+      line-height: 1.95;
+    }
+    .body-p {
+      font-size: 0.96rem;
+      font-weight: 300;
+      color: #5A4A35;
+      line-height: 1.95;
+      margin-bottom: 1.3rem;
+    }
+    .body-p strong { color: var(--bark); font-weight: 500; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .fade { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .fade.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.12s; }
+    .d2 { transition-delay: 0.24s; }
+    .d3 { transition-delay: 0.36s; }
+    .d4 { transition-delay: 0.48s; }
+
+    /* ─── NAVIGATION ─── */
+    .nav {
+      position: fixed; top: 0; right: 0; left: 0;
+      z-index: 100;
+      padding: 2rem 2.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: all 0.4s var(--ease);
+    }
+    .nav.scrolled {
+      background: rgba(247, 243, 236, 0.96);
+      backdrop-filter: blur(16px);
+      padding: 1.1rem 2.5rem;
+      box-shadow: 0 1px 0 rgba(74, 53, 32, 0.08);
+    }
+    .nav-logo {
+      font-family: var(--f-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--soil);
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex; gap: 2.75rem; list-style: none; align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--taupe);
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--soil); }
+    .nav-cta {
+      color: var(--soil) !important;
+      border: 1px solid var(--stone) !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 1px;
+      transition: background 0.2s ease, border-color 0.2s ease !important;
+    }
+    .nav-cta:hover { background: var(--soil) !important; color: var(--linen) !important; border-color: var(--soil) !important; }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--soil); border-radius: 1px;
+      transition: all 0.3s var(--ease);
+    }
+
+    /* ─── HERO SPLIT ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Text pane — right side in RTL */
+    .hero-text {
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 10rem 5rem 6rem 3.5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .hero-text::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -2px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, transparent, var(--linen-dk), transparent);
+    }
+
+    .hero-label {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-family: var(--f-display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--soil);
+      margin-bottom: 2.5rem;
+    }
+    .hero-title em {
+      display: block;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--bronze);
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--taupe);
+      line-height: 1.9;
+      max-width: 400px;
+      margin-bottom: 3rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--soil);
+      color: var(--linen);
+      padding: 1rem 2.2rem;
+      border-radius: 1px;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      width: fit-content;
+      transition: background 0.25s ease;
+    }
+    .hero-cta:hover { background: var(--bark); }
+
+    .hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--taupe);
+      margin-top: 1.25rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .hero-secondary:hover { color: var(--soil); }
+    .hero-secondary::after {
+      content: '←';
+      font-size: 0.7rem;
+    }
+
+    /* Photo pane — left side in RTL */
+    .hero-photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--linen-md);
+    }
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(247,243,236,0.55) 0%,
+        transparent 35%
+      );
+      z-index: 1;
+    }
+
+    /* floating quote card */
+    .hero-quote {
+      position: absolute;
+      bottom: 4rem;
+      left: 3rem;
+      z-index: 2;
+      background: rgba(247, 243, 236, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(196,180,156,0.4);
+      padding: 1.75rem 2rem;
+      max-width: 320px;
+      border-radius: 1px;
+      box-shadow: 0 12px 40px rgba(42, 31, 14, 0.1);
+    }
+    .hero-quote-text {
+      font-family: var(--f-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--bark);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+    .hero-quote-attr {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    /* hero entrance */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-label  { animation: fadeIn 0.8s ease both 0.2s; }
+    .hero-title  { animation: fadeIn 0.8s ease both 0.35s; }
+    .hero-desc   { animation: fadeIn 0.8s ease both 0.5s; }
+    .hero-cta    { animation: fadeIn 0.8s ease both 0.65s; }
+    .hero-secondary { animation: fadeIn 0.8s ease both 0.75s; }
+    .hero-quote  { animation: fadeIn 0.9s ease both 0.8s; }
+
+    /* ─── WELCOME STRIPE ─── */
+    .welcome {
+      background: var(--linen-md);
+      padding: 7rem 0;
+      text-align: center;
+    }
+    .welcome-inner { max-width: 660px; margin: 0 auto; }
+    .welcome-quote {
+      font-family: var(--f-display);
+      font-size: clamp(1.65rem, 3.2vw, 2.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--bark);
+      line-height: 1.6;
+      margin: 2rem 0;
+    }
+    .welcome-body {
+      font-size: 1rem;
+      font-weight: 300;
+      color: var(--taupe);
+      line-height: 2;
+    }
+    .welcome-body strong { color: var(--soil); font-weight: 500; }
+
+    /* ─── ABOUT ─── */
+    .about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 7rem;
+      align-items: center;
+    }
+
+    .about-img-col { position: relative; }
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 1px;
+      filter: brightness(0.98) saturate(0.95);
+    }
+    .about-frame {
+      position: absolute;
+      top: -1.5rem; right: -1.5rem;
+      bottom: 1.5rem; left: 1.5rem;
+      border: 1px solid rgba(155,122,66,0.2);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+    .about-years {
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--soil);
+      color: var(--linen);
+      padding: 1.2rem 1.6rem;
+      text-align: center;
+      border-radius: 1px;
+      white-space: nowrap;
+    }
+    .about-years-num {
+      display: block;
+      font-family: var(--f-display);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--bronze-lt);
+      line-height: 1;
+    }
+    .about-years-lbl {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247,243,236,0.55);
+      margin-top: 0.3rem;
+    }
+
+    .pull-q {
+      font-family: var(--f-display);
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--bark);
+      border-right: 2px solid var(--bronze);
+      padding-right: 1.5rem;
+      margin: 2rem 0;
+      line-height: 1.75;
+    }
+
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.75rem; }
+    .tag {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--taupe);
+      border: 1px solid var(--linen-dk);
+      padding: 0.25rem 0.8rem;
+      border-radius: 1px;
+      letter-spacing: 0.04em;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .tag:hover { border-color: var(--bronze); color: var(--bark); }
+
+    /* ─── OFFERINGS ─── */
+    .offerings { background: var(--linen); }
+
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      border: 1px solid var(--linen-dk);
+      background: var(--linen-dk);
+      margin-top: 5rem;
+    }
+
+    .offer-item {
+      background: var(--linen);
+      padding: 2.8rem 2.4rem;
+      transition: background 0.3s ease;
+      cursor: default;
+    }
+    .offer-item:hover { background: var(--white); }
+
+    .offer-num {
+      font-family: var(--f-display);
+      font-size: 3rem;
+      font-weight: 300;
+      color: var(--linen-dk);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+      user-select: none;
+    }
+
+    .offer-name {
+      font-family: var(--f-display);
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--soil);
+      margin-bottom: 0.75rem;
+    }
+
+    .offer-desc {
+      font-size: 0.85rem;
+      font-weight: 300;
+      color: var(--taupe);
+      line-height: 1.9;
+    }
+
+    /* ─── APPROACH (3-pillar) ─── */
+    .approach { background: var(--linen-md); }
+
+    .approach-inner {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      gap: 0;
+      margin-top: 5rem;
+    }
+
+    .pillar { padding: 0 3rem; }
+    .pillar:first-child { padding-right: 0; }
+    .pillar:last-child  { padding-left: 0; }
+
+    .pillar-sep {
+      background: var(--linen-dk);
+      align-self: stretch;
+    }
+
+    .pillar-icon {
+      width: 36px; height: 36px;
+      border: 1px solid var(--stone);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    .pillar-icon svg { width: 15px; height: 15px; color: var(--bronze); }
+
+    .pillar-title {
+      font-family: var(--f-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--soil);
+      margin-bottom: 0.75rem;
+    }
+    .pillar-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--taupe);
+      line-height: 1.9;
+    }
+
+    /* ─── TESTIMONIAL (editorial, single) ─── */
+    .testimonial { background: var(--white); }
+    .testi-editorial {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testi-mark {
+      font-family: var(--f-display);
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--stone);
+      display: block;
+      margin-bottom: 2rem;
+    }
+    .testi-text {
+      font-family: var(--f-display);
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--bark);
+      line-height: 1.65;
+      margin-bottom: 2.5rem;
+    }
+    .testi-attr {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    /* small secondary testimonials */
+    .testi-grid-sm {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 4rem;
+      padding-top: 4rem;
+      border-top: 1px solid var(--linen-dk);
+    }
+    .testi-sm {
+      padding: 2rem;
+      background: var(--linen);
+      border-radius: 1px;
+    }
+    .testi-sm-text {
+      font-family: var(--f-display);
+      font-size: 0.98rem;
+      font-style: italic;
+      font-weight: 300;
+      color: #5A4A35;
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+    }
+    .testi-sm-name {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--taupe);
+    }
+
+    /* ─── CONTACT / CTA ─── */
+    .contact {
+      background: var(--soil);
+      padding: var(--sec-py) 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(155,122,66,0.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 50%, rgba(107,123,90,0.10) 0%, transparent 55%);
+    }
+    .contact-inner {
+      position: relative; z-index: 1;
+      max-width: 580px; margin: 0 auto; padding: 0 2rem;
+    }
+    .contact .label { color: rgba(247,243,236,0.4); }
+    .contact h2.section-title { color: var(--linen); }
+    .contact-sub {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(247,243,236,0.6);
+      line-height: 1.95;
+      margin: 2rem 0 3.5rem;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: #25D366;
+      color: white;
+      padding: 1.1rem 2.6rem;
+      border-radius: 1px;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 400;
+      transition: background 0.25s ease;
+    }
+    .btn-wa:hover { background: #1EB85A; }
+    .btn-wa svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+
+    .contact-note {
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(247,243,236,0.35);
+    }
+
+    .contact-details {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(247,243,236,0.1);
+    }
+    .contact-detail {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; font-weight: 300;
+      color: rgba(247,243,236,0.45);
+    }
+    .contact-detail svg { width: 14px; height: 14px; color: var(--bronze-lt); }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #1C1208;
+      padding: 3rem 0;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--f-display);
+      font-size: 1.2rem;
+      font-weight: 300;
+      color: var(--bronze-lt);
+    }
+    .footer-sub {
+      font-size: 0.72rem; font-weight: 300;
+      color: rgba(247,243,236,0.25);
+      letter-spacing: 0.05em;
+      margin-top: 0.2rem;
+    }
+    .footer-links {
+      display: flex; gap: 0.5rem;
+    }
+    .footer-links a {
+      width: 30px; height: 30px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.3);
+      transition: all 0.2s ease;
+    }
+    .footer-links a:hover { border-color: rgba(155,122,66,0.5); color: var(--bronze-lt); }
+    .footer-links svg { width: 13px; height: 13px; }
+    .footer-copy {
+      font-size: 0.72rem; font-weight: 300;
+      color: rgba(255,255,255,0.2);
+    }
+
+    /* ─── FLOATING WA ─── */
+    .float-wa {
+      position: fixed;
+      bottom: 2rem; left: 2rem;
+      z-index: 500;
+      width: 52px; height: 52px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.38);
+      transition: transform 0.2s ease;
+    }
+    .float-wa:hover { transform: scale(1.1); }
+    .float-wa svg { width: 25px; height: 25px; fill: white; }
+    .float-wa::before {
+      content: '';
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      background: rgba(37,211,102,0.18);
+      animation: ring 2.5s ease-in-out infinite;
+    }
+    @keyframes ring {
+      0%,100% { transform:scale(1); opacity:0.8; }
+      50% { transform:scale(1.4); opacity:0; }
+    }
+
+    /* ─── MOBILE MENU ─── */
+    .mob-overlay {
+      position: fixed; inset: 0;
+      background: rgba(42,31,14,0.45);
+      z-index: 999; opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .mob-overlay.open { opacity: 1; pointer-events: all; }
+
+    .mob-panel {
+      position: fixed; top: 0; right: 0;
+      width: 280px; height: 100vh;
+      background: var(--white);
+      z-index: 1000;
+      padding: 5rem 2rem 2rem;
+      transform: translateX(100%);
+      transition: transform 0.35s var(--ease);
+      box-shadow: -4px 0 30px rgba(42,31,14,0.1);
+    }
+    .mob-panel.open { transform: translateX(0); }
+    .mob-close {
+      position: absolute; top: 1.5rem; left: 1.5rem;
+      background: none; border: none; font-size: 1.2rem;
+      color: var(--taupe); cursor: pointer;
+    }
+    .mob-nav { list-style: none; display: flex; flex-direction: column; gap: 0.2rem; }
+    .mob-nav a {
+      display: block; padding: 0.9rem 0;
+      font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+      font-weight: 300; color: var(--taupe);
+      border-bottom: 1px solid var(--linen-dk);
+      transition: color 0.2s ease;
+    }
+    .mob-nav a:hover { color: var(--soil); }
+    .mob-wa {
+      margin-top: 2rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      background: #25D366; color: white;
+      padding: 0.8rem 1.5rem; border-radius: 1px;
+      font-size: 0.76rem; justify-content: center; font-weight: 400;
+    }
+
+    /* ─── SEC HEADER HELPER ─── */
+    .sec-hdr { margin-bottom: 0; }
+    .sec-hdr-c { text-align: center; }
+    .sec-hdr-c .lead { margin: 0 auto; text-align: center; max-width: 520px; }
+    .sec-hdr-c .rule  { margin: 1.5rem auto; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      :root { --sec-py: 6rem; }
+
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 8rem 2.5rem 5rem; min-height: 100vh; }
+      .hero-photo { display: none; }
+
+      .about-grid { grid-template-columns: 1fr; gap: 4rem; }
+      .about-img-col { max-width: 480px; margin: 0 auto; }
+      .about-years { transform: translateX(0); left: auto; right: 0; }
+
+      .offer-grid { grid-template-columns: 1fr 1fr; }
+
+      .approach-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .pillar-sep { display: none; }
+      .pillar { padding: 0; border-bottom: 1px solid var(--linen-dk); padding-bottom: 2.5rem; }
+      .pillar:last-child { border-bottom: none; padding-bottom: 0; }
+
+      .testi-grid-sm { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      :root { --sec-py: 5rem; }
+      .container { padding: 0 1.5rem; }
+      .hero-text { padding: 7rem 1.5rem 4rem; }
+      .offer-grid { grid-template-columns: 1fr; }
+      .contact-details { flex-direction: column; gap: 1rem; align-items: center; }
+    }
+
+    /* ─── REDUCED MOTION ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+      .fade { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav" id="nav">
+    <span class="nav-logo">יפית</span>
+
+    <ul class="nav-links">
+      <li><a href="#about">אודות</a></li>
+      <li><a href="#offerings">טיפולים</a></li>
+      <li><a href="#testimonial">המלצות</a></li>
+      <li><a href="#contact" class="nav-cta">לתיאום פגישה</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="פתח תפריט">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mob-overlay" id="mobOverlay"></div>
+  <div class="mob-panel" id="mobPanel">
+    <button class="mob-close" id="mobClose" aria-label="סגור">✕</button>
+    <ul class="mob-nav">
+      <li><a href="#about"        class="mob-link">אודות</a></li>
+      <li><a href="#offerings"   class="mob-link">טיפולים</a></li>
+      <li><a href="#approach"    class="mob-link">הגישה שלי</a></li>
+      <li><a href="#testimonial" class="mob-link">המלצות</a></li>
+      <li><a href="#contact"     class="mob-link">צרו קשר</a></li>
+    </ul>
+    <a href="https://wa.me/972547744141" class="mob-wa">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      דברו עם יפית
+    </a>
+  </div>
+
+  <!-- HERO SPLIT -->
+  <section class="hero" id="home">
+
+    <!-- Right pane: text -->
+    <div class="hero-text">
+      <span class="hero-label">מטפלת הוליסטית גוף-נפש &nbsp;·&nbsp; תל אביב</span>
+
+      <h1 class="hero-title">
+        חזרה<br />
+        <em>אל עצמך</em>
+      </h1>
+
+      <p class="hero-desc">
+        ליווי אישי ומעמיק המשלב גוף ונפש — לאנשים שהגיע הזמן שלהם לעצור, להתבונן פנימה ולשחרר.
+      </p>
+
+      <a href="https://wa.me/972547744141?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8" target="_blank" class="hero-cta">
+        לשיחת היכרות חינמית
+      </a>
+      <a href="#about" class="hero-secondary">הכירי את יפית</a>
+    </div>
+
+    <!-- Left pane: photo + floating quote -->
+    <div class="hero-photo">
+      <img src="assets/images/styled/yafit-selfie-clean.jpeg" alt="יפית מוכתרי — מטפלת הוליסטית" />
+      <blockquote class="hero-quote">
+        <p class="hero-quote-text">מכל הדרכים שעברה בחיים, המסע חזרה אל עצמה היה היפה מכולן.</p>
+        <cite class="hero-quote-attr">— מטופלת, תל אביב</cite>
+      </blockquote>
+    </div>
+
+  </section>
+
+  <!-- WELCOME STRIPE -->
+  <section class="welcome" id="welcome">
+    <div class="container">
+      <div class="welcome-inner">
+        <span class="label fade">רגע לפני שנכיר</span>
+
+        <blockquote class="welcome-quote fade d1">
+          "אם הגעת עד לכאן — כנראה שמשהו בפנים מבקש שינוי."
+        </blockquote>
+
+        <p class="welcome-body fade d2">
+          אולי את/ה מרגיש/ה כבר זמן מה שאת/ה רץ/ה בלי לעצור.<br />
+          אולי הגוף מאותת — <strong>עייפות, מתח, חוסר שקט</strong> — ואת/ה ממשיכ/ה הלאה.<br />
+          כשמקשיבים לגוף ולרגש יחד — אפשר לשחרר,<br />
+          ולחזור להרגיש <strong>חיים, בטוחים ומחוברים</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about" id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <div class="about-img-col fade">
+          <img src="assets/images/styled/yafit-4-warm.jpeg" alt="יפית בסביבתה הטבעית" class="about-img-main" />
+          <div class="about-frame"></div>
+          <div class="about-years">
+            <span class="about-years-num">20+</span>
+            <span class="about-years-lbl">שנות ניסיון</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="fade">
+            <span class="label">אודות יפית</span>
+            <h2 class="section-title">המסע שלי<br />מהגוף אל הנפש</h2>
+            <div class="rule"></div>
+          </div>
+
+          <p class="body-p fade d1">
+            המסע המקצועי שלי התחיל דרך <strong>הגוף</strong>. כרקדנית במשך שנים, הגוף תמיד היה עבורי שפה. כבר למעלה מ-20 שנה אני מלווה אנשים בתהליכי שינוי, צמיחה והתפתחות אישית — ופיתחתי הבנה עמוקה של האופן שבו הגוף מחזיק עומס רגשי ודפוסים עמוקים.
+          </p>
+
+          <blockquote class="pull-q fade d2">
+            "היום אני משלבת בין שני העולמות — גוף ונפש — כדי לעזור לאנשים ליצור שינוי עמוק ואמיתי."
+          </blockquote>
+
+          <p class="body-p fade d3">
+            בקליניקה שלי בתל אביב אני מלווה אנשים שמתמודדים עם סטרס, עומס רגשי, חרדה, תקיעות או תחושת חוסר איזון. אני משלבת כלים כמו <strong>NLP, רייקי, שיאצו, פרחי באך והילינג</strong>, לפי מה שכל אדם צריך ברגע נתון.
+          </p>
+
+          <div class="tag-wrap fade d4">
+            <span class="tag">NLP</span>
+            <span class="tag">רייקי</span>
+            <span class="tag">שיאצו</span>
+            <span class="tag">פרחי באך</span>
+            <span class="tag">הילינג</span>
+            <span class="tag">דמיון מודרך</span>
+            <span class="tag">עבודה אנרגטית</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERINGS -->
+  <section class="section offerings" id="offerings">
+    <div class="container">
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="label fade">שיטות הטיפול</span>
+        <h2 class="section-title fade">כלים ממגוון עולמות,<br />מותאמים אישית לך</h2>
+        <div class="rule rule-c fade d1"></div>
+        <p class="lead fade d2">כל מפגש מורכב מהכלים שמתאימים לך — לא תבנית קבועה, אלא מענה אמיתי לצורך.</p>
+      </div>
+
+      <div class="offer-grid">
+
+        <div class="offer-item fade d1">
+          <div class="offer-num">01</div>
+          <h3 class="offer-name">שיחה מעמיקה</h3>
+          <p class="offer-desc">האבחון מתחיל בהקשבה אמיתית. דרך שיחה נגלה יחד מה הגוף מנסה להגיד ומה עומד בבסיס הקושי.</p>
+        </div>
+
+        <div class="offer-item fade d2">
+          <div class="offer-num">02</div>
+          <h3 class="offer-name">רייקי</h3>
+          <p class="offer-desc">טיפול אנרגטי במגע עדין — לאיזון מרכזי האנרגיה, שחרור חסימות ויצירת זרימה פנימית חופשית.</p>
+        </div>
+
+        <div class="offer-item fade d3">
+          <div class="offer-num">03</div>
+          <h3 class="offer-name">שיאצו</h3>
+          <p class="offer-desc">טיפול מגע יפני עתיק — לחיצות עדינות לאורך מסלולי האנרגיה, המשחררות מתח פיזי ומחזירות זרימה ואיזון.</p>
+        </div>
+
+        <div class="offer-item fade d1">
+          <div class="offer-num">04</div>
+          <h3 class="offer-name">פרחי באך</h3>
+          <p class="offer-desc">תמציות פרחים טבעיות לאיזון רגשי — מותאמות אישית, כתמיכה רכה בתהליך הריפוי מבפנים.</p>
+        </div>
+
+        <div class="offer-item fade d2">
+          <div class="offer-num">05</div>
+          <h3 class="offer-name">הילינג ועבודה אנרגטית</h3>
+          <p class="offer-desc">עבודה עדינה עם שדה האנרגיה לשחרור חסימות ועומסים, יחד עם מדיטציה מונחית ליצירת שקט פנימי.</p>
+        </div>
+
+        <div class="offer-item fade d3">
+          <div class="offer-num">06</div>
+          <h3 class="offer-name">NLP ודמיון מודרך</h3>
+          <p class="offer-desc">עבודה עם התת-מודע לשינוי דפוסי חשיבה ואמונות מגבילות — דרך כלים מדויקים ודמיון מונחה.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- APPROACH (3 pillars) -->
+  <section class="section approach" id="approach">
+    <div class="container">
+
+      <div class="sec-hdr sec-hdr-c">
+        <span class="label fade">הגישה שלי</span>
+        <h2 class="section-title fade">הטיפול שלי מאמץ</h2>
+        <div class="rule rule-c fade d1"></div>
+      </div>
+
+      <div class="approach-inner">
+
+        <div class="pillar fade d1">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="pillar-title">מדע</h3>
+          <p class="pillar-desc">אני מאמינה בגישה מבוססת ידע. לאורך השנים הכשרתי את עצמי בשיטות מתקדמות לעבודה עם גוף ונפש יחד.</p>
+        </div>
+
+        <div class="pillar-sep"></div>
+
+        <div class="pillar fade d2">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 class="pillar-title">קדושה</h3>
+          <p class="pillar-desc">הקשר הטיפולי הוא מרחב מקודש עבורי. הגישה ההוליסטית שלי מאשרת את השלמות הפנימית שלך ואת יכולת הריפוי הטבועה בך.</p>
+        </div>
+
+        <div class="pillar-sep"></div>
+
+        <div class="pillar fade d3">
+          <div class="pillar-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3 class="pillar-title">סומטיקה</h3>
+          <p class="pillar-desc">הגוף מספר את הסיפור שהנפש מנסה לשכוח. חיבור מחדש לגוף, בבטחה, הוא לב העבודה שלנו יחד.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL (editorial) -->
+  <section class="section testimonial" id="testimonial">
+    <div class="container">
+
+      <div class="testi-editorial fade">
+        <span class="testi-mark">&ldquo;</span>
+        <p class="testi-text">הגעתי ליפית בתקופה של סטרס גדול מאוד. הטיפול — המגע, השקט, ההקשבה — היה חוויה שאי אפשר לתאר במילים. יצאתי רגועה, נקייה. חזרתי אל עצמי.</p>
+        <cite class="testi-attr">נועה ש. &nbsp;·&nbsp; מטופלת, הרצליה</cite>
+      </div>
+
+      <div class="testi-grid-sm">
+        <div class="testi-sm fade d1">
+          <p class="testi-sm-text">הגעתי עם כאבי גב כרוניים שרופאים לא הצליחו לפתור. אחרי 3 מפגשים הרגשתי לראשונה בשנים שינוי אמיתי — לא רק בגוף, אלא גם בתוכי.</p>
+          <cite class="testi-sm-name">מיכל ל. &nbsp;·&nbsp; תל אביב</cite>
+        </div>
+        <div class="testi-sm fade d2">
+          <p class="testi-sm-text">חיפשתי מישהי שתבין גם את הגוף וגם את הנפש. יפית עשתה את זה בדיוק — הרגשתי שהיא רואה אותי בשלמות. תהליך שינה חיים.</p>
+          <cite class="testi-sm-name">דנה ר. &nbsp;·&nbsp; רמת גן</cite>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+
+      <span class="label fade">צרו קשר</span>
+      <h2 class="section-title fade">מוכנים להתחיל<br />את המסע?</h2>
+      <div class="rule rule-c fade d1" style="background:linear-gradient(to left,transparent,rgba(155,122,66,0.6),transparent);"></div>
+
+      <p class="contact-sub fade d2">
+        אני כאן לכל שאלה. שיחת ההיכרות קצרה, חינמית, וללא התחייבות — רק שיחה אמיתית.
+      </p>
+
+      <a href="https://wa.me/972547744141?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8"
+         target="_blank" class="btn-wa fade d3">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        כתבי / כתוב לי בוואטסאפ
+      </a>
+      <p class="contact-note">בדרך כלל מגיבה תוך מספר שעות</p>
+
+      <div class="contact-details fade d4">
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          תל אביב
+        </div>
+        <div class="contact-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          ראשון–חמישי, 09:00–20:00
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">יפית</div>
+          <div class="footer-sub">מטפלת הוליסטית גוף-נפש &middot; תל אביב</div>
+          <div class="footer-links" style="margin-top:0.75rem;">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="אינסטגרם">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="https://wa.me/972547744141" target="_blank" rel="noopener" aria-label="וואטסאפ">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </a>
+          </div>
+        </div>
+        <p class="footer-copy">© 2026 יפית. כל הזכויות שמורות.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FLOATING WA -->
+  <a href="https://wa.me/972547744141?text=%D7%94%D7%99%D7%99%20%D7%99%D7%A4%D7%99%D7%AA%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%93%D7%A8%D7%9A%20%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%99%D7%95%D7%AA%D7%A8"
+     target="_blank" class="float-wa" title="צרו קשר בוואטסאפ" aria-label="צרו קשר בוואטסאפ">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+  </a>
+
+  <script>
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Scroll reveal
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+
+    // Mobile menu
+    const hamburger  = document.getElementById('hamburger');
+    const mobPanel   = document.getElementById('mobPanel');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const mobClose   = document.getElementById('mobClose');
+
+    function openMenu()  { mobPanel.classList.add('open');    mobOverlay.classList.add('open');    document.body.style.overflow = 'hidden'; }
+    function closeMenu() { mobPanel.classList.remove('open'); mobOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+    hamburger.addEventListener('click', openMenu);
+    mobClose.addEventListener('click', closeMenu);
+    mobOverlay.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mob-link').forEach(l => l.addEventListener('click', closeMenu));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.pageYOffset - 80, behavior: 'smooth' }); }
+      });
+    });
+  </script>
+
+</body>
+</html>
