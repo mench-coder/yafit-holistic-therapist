@@ -31,6 +31,17 @@
   - http://178.105.58.170:8077/card-b.html
   - http://178.105.58.170:8077/card-c.html
 
+## עדכוני 21.6.2026 — כרטיס D/E + פריסה חיה
+
+- **כרטיס D (`card-d.html`)** — שילוב שנבחר: עיצוב כרטיס C (אוורירי) + התמונה מהכרטיס המקורי (yafit-3) עם רקע חדש אוורירי שיוצר במקום הרקע השחור (`assets/images/styled/yafit-3-circle.jpeg`). סלוגן "הגוף שלנו מדבר / הגיע הזמן להקשיב לו". שיטות הטיפול כפסקה רכה (לא כפתורים, ללא NLP). CTA במרווה "בואו נדבר" (ללא המילה ווטסאפ, אייקון נשאר). שיחת היכרות "ללא התחייבות".
+- **כרטיס E (`card-e.html`)** — זהה ל-D, השם "Yaff" בלטינית (Frank Ruhl Libre, תואם לעברית).
+- **תמונת preview לשיתוף** — `og.html` / `og-en.html` → רונדרו ל-1200×630 (`assets/images/og-yafit.png`, `og-yaff.png`) דרך סקיל card-to-image. תגיות OG/Twitter מוחלטות בשני הכרטיסים.
+- **פריסה חיה (GitHub Pages, HTTPS):**
+  - https://mench-coder.github.io/yafit-holistic-therapist/card-d.html (יפית)
+  - https://mench-coder.github.io/yafit-holistic-therapist/card-e.html (Yaff)
+  - מקור: branch `master`, root `/`. עדכון = push → בנייה אוטומטית (~40 שניות).
+- שני השמות (יפית/Yaff) נשמרים בכוונה — הלקוח טרם בחר סופית.
+
 ## ⏳ פתוח
 
 - [x] **מספר ווטסאפ של יפית** — עודכן 12.6.2026 ל-`972547744141` (+972 54-774-4141) בכל הקבצים
