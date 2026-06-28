@@ -47,9 +47,36 @@
       padding: 2.4rem 1.4rem;
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
+
+    /* botanical accents — dried baby's-breath, soft & faded */
+    .botanical-bottom {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 340px;
+      background: url('assets/images/styled/flowers-beige.png') center bottom / cover no-repeat;
+      opacity: 0.55;
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.55) 45%, transparent 100%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.55) 45%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .botanical-top {
+      position: fixed;
+      top: 0; left: 0;
+      width: 240px; height: 200px;
+      background: url('assets/images/styled/flowers-beige.png') center / cover no-repeat;
+      transform: scaleY(-1) scaleX(-1);
+      opacity: 0.3;
+      -webkit-mask-image: radial-gradient(ellipse at top left, rgba(0,0,0,1) 0%, transparent 72%);
+      mask-image: radial-gradient(ellipse at top left, rgba(0,0,0,1) 0%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
 
     /* faint horizon circles — Yaffit loves circles */
     body::before {
@@ -251,17 +278,20 @@
   </style>
 </head>
 <body>
+  <div class="botanical-top" aria-hidden="true"></div>
+  <div class="botanical-bottom" aria-hidden="true"></div>
+
   <main class="wrap">
 
     <div class="photo-wrap reveal">
       <span class="ring-spin-2"></span>
       <span class="ring-spin"></span>
-      <div class="photo"><img src="assets/images/styled/yafit-3-circle-beige.jpeg" alt="יפית — מטפלת הוליסטית גוף-נפש" /></div>
+      <div class="photo"><img src="assets/images/styled/yafit-3-circle-beige2.jpeg" alt="יפית — מטפלת הוליסטית גוף-נפש" /></div>
     </div>
 
     <div class="reveal d1">
       <h1>יפית</h1>
-      <p class="role">מטפלת הוליסטית גוף-נפש · <b>20+ שנות ניסיון</b></p>
+      <p class="role">מטפלת הוליסטית גוף-נפש · <b>15 שנות ניסיון</b></p>
       <p class="tagline">כשהגוף נרגע,<br /><em>הנפש מתחילה לדבר</em></p>
     </div>
 
