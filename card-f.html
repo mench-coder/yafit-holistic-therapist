@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDRSXKQDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZDRSXKQDRL');
+  </script>
+
   <title>יפית | מטפלת הוליסטית גוף-נפש</title>
   <meta name="description" content="יפית — מטפלת הוליסטית גוף-נפש בתל אביב. כשהגוף נרגע, הנפש מתחילה לדבר. דברו איתי בווטסאפ." />
   <meta property="og:type" content="website" />
@@ -321,6 +331,35 @@
     document.querySelectorAll('[data-tel]').forEach(function (el) {
       el.href = 'tel:+' + PHONE;
     });
+
+    /* ---- analytics events ---- */
+    function track(name, params) {
+      if (typeof gtag === 'function') { gtag('event', name, params || {}); }
+    }
+
+    document.querySelectorAll('[data-wa]').forEach(function (el) {
+      el.addEventListener('click', function () { track('whatsapp_click', { location: 'card-f' }); });
+    });
+    document.querySelectorAll('[data-tel]').forEach(function (el) {
+      el.addEventListener('click', function () { track('call_click', { location: 'card-f' }); });
+    });
+
+    /* scroll depth — 25 / 50 / 75 / 100 */
+    var fired = {};
+    var marks = [25, 50, 75, 100];
+    function checkScroll() {
+      var doc = document.documentElement;
+      var scrollable = doc.scrollHeight - doc.clientHeight;
+      var pct = scrollable <= 0 ? 100 : Math.round((window.scrollY / scrollable) * 100);
+      marks.forEach(function (m) {
+        if (pct >= m && !fired[m]) {
+          fired[m] = true;
+          track('scroll', { percent_scrolled: m });
+        }
+      });
+    }
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    window.addEventListener('load', checkScroll);
   </script>
 </body>
 </html>
