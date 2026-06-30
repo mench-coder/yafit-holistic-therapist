@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יפית מוכתרי — אסטרטגיה ושאלון דיוק</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #FDFCF9;
+      --sand-50: #F5EFE6;
+      --sand-100: #EDE0CC;
+      --sand-300: #C8B49A;
+      --bark: #5C3D26;
+      --soil: #3A2215;
+      --sage: #6B7C5A;
+      --sage-light: #97A886;
+      --bronze: #B8873A;
+      --bronze-light: #D4A85C;
+      --charcoal: #2C1C0E;
+      --charcoal-lt: #6B5440;
+      --muted: #9A7860;
+      --font-display: 'Frank Ruhl Libre', Georgia, serif;
+      --font-deco: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Assistant', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--charcoal);
+      background: var(--cream);
+      direction: rtl;
+      line-height: 1.65;
+      font-size: 13px;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 16mm;
+      background: var(--cream);
+      position: relative;
+    }
+
+    .page + .page { page-break-before: always; }
+
+    /* Cover */
+    .cover {
+      background: linear-gradient(150deg, var(--soil) 0%, #2a1810 55%, var(--bark) 100%);
+      color: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 297mm;
+    }
+
+    .cover .eyebrow { color: var(--bronze-light); }
+    .cover h1 {
+      font-family: var(--font-display);
+      font-size: 38px;
+      font-weight: 500;
+      line-height: 1.15;
+      margin: 0.5rem 0;
+    }
+    .cover .sub {
+      font-family: var(--font-deco);
+      font-size: 19px;
+      color: rgba(253,252,249,0.85);
+      margin-top: 0.75rem;
+      max-width: 32rem;
+    }
+    .cover .meta {
+      margin-top: 3rem;
+      font-size: 12px;
+      color: rgba(253,252,249,0.6);
+      line-height: 1.9;
+    }
+    .cover .pills { margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .cover .pill {
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 11px;
+      color: rgba(253,252,249,0.9);
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--bark);
+      margin: 0 0 0.3rem;
+    }
+
+    .section-rule {
+      width: 3rem; height: 2px; background: var(--bronze);
+      margin: 0.5rem 0 1.25rem;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin: 1.4rem 0 0.5rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--sand-100);
+    }
+
+    h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--bark);
+      margin: 1rem 0 0.3rem;
+    }
+
+    p { margin: 0 0 0.6rem; }
+    strong { font-weight: 700; color: var(--soil); }
+
+    .lead {
+      font-family: var(--font-deco);
+      font-size: 16px;
+      color: var(--charcoal-lt);
+      margin-bottom: 1rem;
+    }
+
+    ul, ol { margin: 0.3rem 1.2rem 0.8rem; }
+    li { margin-bottom: 0.3rem; }
+
+    .callout {
+      background: var(--sand-50);
+      border-right: 3px solid var(--bronze);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin: 0.8rem 0;
+      font-size: 12.5px;
+    }
+
+    .callout.sage { border-color: var(--sage); background: #eef1ea; }
+
+    .mono-box {
+      background: var(--soil);
+      color: var(--sand-100);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      font-size: 12px;
+      line-height: 1.8;
+      margin: 0.8rem 0;
+      direction: ltr;
+      text-align: right;
+    }
+    .mono-box .he { direction: rtl; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin: 0.6rem 0 1rem;
+    }
+    th, td {
+      text-align: right;
+      padding: 0.5rem 0.7rem;
+      border-bottom: 1px solid var(--sand-100);
+      vertical-align: top;
+    }
+    th { background: var(--sand-50); color: var(--bark); font-weight: 700; }
+
+    .q {
+      margin: 0.55rem 0;
+      padding-right: 1.9rem;
+      position: relative;
+      font-size: 13px;
+    }
+    .q .num {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 1.4rem; height: 1.4rem;
+      background: var(--sage);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-body);
+    }
+    .q .answer-line {
+      display: block;
+      border-bottom: 1px dotted var(--sand-300);
+      height: 1.1rem;
+      margin-top: 0.25rem;
+    }
+
+    .purpose {
+      font-size: 11px;
+      font-style: italic;
+      color: var(--muted);
+      margin: 0.1rem 0 0.6rem;
+    }
+
+    .priority {
+      background: #fff8ec;
+      border: 1px solid var(--bronze-light);
+      border-radius: 8px;
+      padding: 0.9rem 1.1rem;
+      margin: 1rem 0;
+    }
+    .priority h4 { margin-top: 0; color: var(--bronze-muted, #8F6A2E); }
+
+    .footnote {
+      font-size: 10.5px;
+      color: var(--muted);
+      border-top: 1px solid var(--sand-100);
+      padding-top: 0.6rem;
+      margin-top: 1.5rem;
+    }
+
+    .doc-tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      background: #eef1ea;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.8rem;
+    }
+
+    @media print {
+      body { font-size: 12.5px; }
+      .page { margin: 0; box-shadow: none; }
+    }
+    @media screen {
+      body { background: #d8cfc2; padding: 20px 0; }
+      .page { box-shadow: 0 4px 24px rgba(0,0,0,0.15); margin-bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER -->
+  <section class="page cover">
+    <span class="eyebrow">תוכנית עבודה אסטרטגית · יוני 2026</span>
+    <h1>יפית מוכתרי<br />מטפלת הוליסטית גוף-נפש</h1>
+    <p class="sub">אסטרטגיית "יומן מלא" + שאלון דיוק — מסמך עבודה לסגירת ההחלטות שקובעות הכל</p>
+    <div class="pills">
+      <span class="pill">מסלול: לייפסטייל · 1:1</span>
+      <span class="pill">יעד: ~30K/חודש</span>
+      <span class="pill">איכות חיים</span>
+    </div>
+    <div class="meta">
+      מטרת על: יומן מלא דרך אמון והפניות — לא מכונת שיווק.<br />
+      שני חלקים: (1) האסטרטגיה החדה · (2) שאלון דיוק ליפית.<br />
+      30.6.2026
+    </div>
+  </section>
+
+  <!-- PART 1: STRATEGY -->
+  <section class="page">
+    <span class="doc-tag">חלק 1 · אסטרטגיה</span>
+    <h2>אסטרטגיית "יומן מלא"</h2>
+    <div class="section-rule"></div>
+    <p class="lead">המשאב היקר הוא הזמן והאנרגיה של יפית. כל שעת שיווק היא שעה שלא מטפלים או לא נחים. <strong>התוכנית הזו היא המינון האפקטיבי המינימלי — לא יותר.</strong></p>
+
+    <h3>1. מה זו בכלל "הצלחה" כאן</h3>
+    <p>זה לא עסק שמתרחב — זו פרקטיקה שמתמלאת. הניצחון הוא <strong>מספר סופי וקטן</strong>, לא צמיחה אינסופית.</p>
+    <div class="mono-box">
+      <span class="he">יעד תפוסה (לאמת מול יפית): X מפגשים/שבוע שהיא <em>רוצה</em></span><br />
+      <span class="he">בסיס לקוחות שמחזיק תפוסה כזו: ~30–40 לקוחות מתחלפים</span><br />
+      <span class="he">קצב גיוס בהתחלה: ~8–12 חדשים/חודש → אח"כ בעיקר תחזוקה</span>
+    </div>
+    <p><strong>ההשלכה:</strong> צריך לגייס סדר גודל של ~30 לקוחות, פעם אחת, ואז לתחזק. זו <strong>בעיית אמון והפניות — לא בעיית שיווק המוני.</strong> כשהיומן מלא — עוצרים את הגיוס ומחזיקים רק את מנוע ההפניות. לדעת מתי להפסיק זה חלק מהאסטרטגיה.</p>
+
+    <h3>2. הצוואר האמיתי</h3>
+    <p>אישה בת 40–55 בת"א בלחץ מוצאת מטפלת דרך, לפי סדר:</p>
+    <ol>
+      <li><strong>המלצה אישית</strong> (חברה, לקוחה קודמת)</li>
+      <li><strong>הפניה ממטפל אחר</strong> (יוגה, פסיכולוג, רופא משלים)</li>
+      <li>חיפוש מקומי בגוגל כשכבר יש כוונה → מסתכלת על <strong>ביקורות</strong></li>
+    </ol>
+    <div class="callout sage">כמעט אף פעם לא אינסטגרם קר, לא בלוג, לא פרסום. → <strong>מנוע ההפניות והאמון הוא הכל. תוכן שוטף הוא בזבוז של הזמן היקר.</strong></div>
+
+    <h3>3. שלושת המהלכים (וזהו — שאר הרשימה מתה)</h3>
+    <h4>מהלך 1 — הצתת הרשת החמה (פעם אחת, שבוע 1) — המילוי המהיר ביותר</h4>
+    <p>הדרך המהירה למלא יומן היא לא זרים אלא מי שכבר מכיר ומאמין: רשימת כל לקוח עבר + מעגל אישי, הודעה אישית (לא מסה) + הכרטיס. <strong>זה לבדו ממלא נתח גדול מהיומן ההתחלתי.</strong></p>
+    <h4>מהלך 2 — מנוע הפניות + 3 שותפויות (שוטף, מאמץ אפסי)</h4>
+    <ul>
+      <li><strong>בקשה שיטתית</strong> מכל לקוח מרוצה — עם סיבה לתת (תמהיל פרחי באך / מפגש המשך בהנחה למפנה ולמופנה).</li>
+      <li><strong>3 שותפויות הדדיות:</strong> סטודיו יוגה, פסיכולוג/ית, מורה למדיטציה / מטפלת נשים.</li>
+      <li><strong>ביקורות Google</strong> — הפניה ואמון בנכס אחד.</li>
+    </ul>
+    <h4>מהלך 3 — תיקון ההמרה (פעם אחת, שבועות 1–2) — ממנף את כל השאר</h4>
+    <ul>
+      <li><strong>3 ציטוטים אמיתיים</strong> (להחליף את המומצאים — סיכון אמינות פעיל).</li>
+      <li><strong>"מה קורה במפגש הראשון"</strong> — מסיר את חשש ה"וודו" ואי-הוודאות.</li>
+      <li><strong>מסר מיצוב אחד</strong> במקום רשימת 6 כלים:</li>
+    </ul>
+    <div class="callout">"הגוף זוכר מה שהראש שכח. אני מתחילה משם." — 20 שנה כרקדנית הן הטריז הייחודי. הכלים נשארים מתחת למטריה, לא כרשימת מכולת.</div>
+  </section>
+
+  <section class="page">
+    <span class="doc-tag">חלק 1 · אסטרטגיה (המשך)</span>
+
+    <h3>4. מה משאירים מינימלית (נכסי אמון, לא ערוצי תוכן)</h3>
+    <ul>
+      <li><strong>Google Business Profile</strong> — הקמה חד-פעמית. תופס חיפוש מקומי בכוונה גבוהה + צובר ביקורות. ROI גבוה, תחזוקה אפסית.</li>
+      <li><strong>אינסטגרם</strong> — פרופיל ש"קיים ונראה חי" כשבודקים אותה. <strong>לא</strong> מכונת תוכן. עדכון מדי פעם, לא טרדמיל.</li>
+    </ul>
+
+    <h3>5. מה לא עושים (לעכשיו) — וזו ההחלטה החשובה</h3>
+    <p>בלוג · פרויקט SEO · קצב פוסטים קבוע · פרסום ממומן · וידאו מופק · דחיפת האתר המלא. <strong>כל אלה גוזלים את הזמן היקר ולא פותרים את צוואר האמון/ההפניות.</strong></p>
+
+    <h3>6. המנוף שלא עולה אף שעה: מחיר וחבילה</h3>
+    <ul>
+      <li><strong>מחיר:</strong> מ-350 ל-450 = <strong>+28% הכנסה על אותו יומן</strong>. אפס שעות נוספות.</li>
+      <li><strong>חבילה / מסע:</strong> למכור 3–5 מפגשים כמסע (לא כ"מבצע דחיפות"). מעלה התמדה, LTV ומחליק את היומן.</li>
+      <li>ה-ROI הגבוה ביותר, וחינמי בזמן. <strong>לדון מול יפית ראשון.</strong></li>
+    </ul>
+
+    <h3>7. Roadmap 90 יום (מרוכז)</h3>
+    <table>
+      <thead><tr><th>שבועות</th><th>מיקוד</th><th>תוצרים</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1–2 · הזנקה</strong></td><td>המרה + רשת חמה + GBP</td><td>3 ציטוטים · "מפגש ראשון" · מסר אחד · הודעה לרשת החמה · פרופיל GBP</td></tr>
+        <tr><td><strong>3–6 · מנוע</strong></td><td>הפניות + שותפויות</td><td>בקשת הפניה שיטתית · 2 שותפויות · ביקורות Google מתחילות לזרום</td></tr>
+        <tr><td><strong>7–12 · תחזוקה</strong></td><td>למדוד ולכפול</td><td>לדעת מאיפה כל לקוח · להעמיק את הערוץ שעובד · כשהיומן מלא — לעצור גיוס</td></tr>
+      </tbody>
+    </table>
+
+    <h3>8. המדד היחיד</h3>
+    <p><strong>לקוחות חדשים/חודש + % יומן מלא.</strong> לא עוקבים, לא קליקים, לא פוסטים. כשמגיעים ליעד התפוסה — מחזיקים רק את בקשת ההפניה ו-GBP.</p>
+
+    <div class="footnote">הסכומים (400₪, 30K, 30–40 לקוחות) הם הנחות עבודה לאימות בחלק 2. "מסע 10 מפגשים / 3 מקומות" — לא לשחזר כמנטרה שיווקית (הוראת לקוח).</div>
+  </section>
+
+  <!-- PART 2: QUESTIONS -->
+  <section class="page">
+    <span class="doc-tag">חלק 2 · שאלון דיוק</span>
+    <h2>שאלות דיוק ליפית</h2>
+    <div class="section-rule"></div>
+    <p class="lead">5–10 דקות. התשובות הופכות את התוכנית מהנחות למספרים אמיתיים, וקובעות בדיוק כמה לקוחות צריך ואיך ממלאים את היומן.</p>
+    <div class="callout">אפשר לענות בקצרה — גם "בערך" עוזר. אין תשובות נכונות/לא נכונות.</div>
+
+    <div class="priority">
+      <h4>אם אין זמן לכל ה-23 — 3 השאלות הקריטיות:</h4>
+      <ol style="margin-bottom:0;">
+        <li>מחיר מפגש + כמה מפגשים בשבוע את רוצה (קובע את כל המתמטיקה)</li>
+        <li>מי 3–5 לקוחות שייתנו ציטוט אמיתי (מתקן את סיכון האמינות)</li>
+        <li>אילו מטפלים את מכירה שיכולים להפנות (מפעיל את מנוע ההפניות)</li>
+      </ol>
+    </div>
+
+    <h3>חלק א' — המספרים (הכי חשוב)</h3>
+    <p class="purpose">פותח: כמה לקוחות באמת צריך, ומה היעד הכספי האמיתי.</p>
+    <div class="q"><span class="num">1</span>מה המחיר של מפגש היום? (₪ למפגש)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">2</span>כמה לקוחות פעילים יש כרגע? (מי שמגיע באופן קבוע פחות או יותר)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">3</span>כמה מפגשים בפועל את עושה בשבוע בממוצע היום?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">4</span>כמה מפגשים בשבוע היית <em>רוצה</em> ביומן מלא ונעים — לא המקסימום? (15? 20? 25?)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">5</span>כמה הוצאות קבועות יש בחודש? (שכ"ד, ציוד — בערך)<span class="answer-line"></span></div>
+
+    <h3>חלק ב' — מחיר וחבילה (המנוף הכי חזק)</h3>
+    <p class="purpose">פותח: איך להעלות הכנסה בלי לעבוד יותר שעות.</p>
+    <div class="q"><span class="num">6</span>מתי עדכנת מחיר לאחרונה? נוח לחשוב על העלאה (למשל ל-450)?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">7</span>מוכרת מפגשים בודדים, או גם "מסע"/סדרה? אם כן — כמה מפגשים ובאיזה מחיר?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">8</span>שיחת ההיכרות — "חינם" או "ללא התחייבות"? מה אורכה (טלפון/זום/וואטסאפ)?<span class="answer-line"></span></div>
+  </section>
+
+  <section class="page">
+    <span class="doc-tag">חלק 2 · שאלון דיוק (המשך)</span>
+
+    <h3>חלק ג' — קיבולת ולוגיסטיקה</h3>
+    <p class="purpose">פותח: מה לפרסם, ואיך נראה יומן מלא בפועל.</p>
+    <div class="q"><span class="num">9</span>כתובת הקליניקה — מותר לפרסם, או רק "תל אביב"?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">10</span>שעות פעילות קבועות?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">11</span>מפגשים אונליין (זום) — כן/לא? אם כן, באיזה אחוז מהמקרים?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">12</span>אמצעי תשלום — מזומן / ביט / פייבוקס / העברה?<span class="answer-line"></span></div>
+
+    <h3>חלק ד' — אמון והפניות (מנוע הגיוס המרכזי)</h3>
+    <p class="purpose">פותח: את הערוץ #1 — מפה לאוזן והפניות.</p>
+    <div class="q"><span class="num">13</span>מי 3–5 לקוחות מרוצים שאפשר לבקש מהם ציטוט אמיתי / המלצה?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">14</span>ביקורות Google — יש כבר פרופיל עסקי? נוח לבקש ביקורות מלקוחות?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">15</span>מטפלים/אנשי מקצוע שאת מכירה שיכולים להפנות (ושאליהם תפני)? שמות/תחומים.<span class="answer-line"></span></div>
+    <div class="q"><span class="num">16</span>רשת חמה — בערך כמה לקוחות עבר + אנשים קרובים לשלוח להם הודעה אישית עם הכרטיס?<span class="answer-line"></span></div>
+
+    <h3>חלק ה' — מיצוב ומסר</h3>
+    <p class="purpose">פותח: את המסר האחד שמחליף את "רשימת 6 הכלים".</p>
+    <div class="q"><span class="num">17</span>המסר: "הגוף זוכר מה שהראש שכח — אני מתחילה משם." מתחבר? משהו לשנות/לרכך?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">18</span>שנות ניסיון — 15 או 20+? (כרגע אי-התאמה: בכרטיס 15, באתר 20+)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">19</span>מי הלקוח/ה האידיאלי/ת? מי הכי כיף ונכון לעבוד איתו/ה? (גיל, מצב, מה מביא)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">20</span>משהו שאת <em>לא</em> רוצה שיופיע במיתוג / לא מרגיש נכון?<span class="answer-line"></span></div>
+
+    <h3>חלק ו' — נכסים קיימים</h3>
+    <p class="purpose">פותח: מה כבר יש ומה צריך להפעיל.</p>
+    <div class="q"><span class="num">21</span>אינסטגרם — יש חשבון פעיל? מה ה-handle?<span class="answer-line"></span></div>
+    <div class="q"><span class="num">22</span>הפלייר — למה נועד? (הדפסה לקליניקה? סטטוס/סטורי? הפניות?)<span class="answer-line"></span></div>
+    <div class="q"><span class="num">23</span>האתר המלא (yaffholistic.com) — להפעיל עכשיו, או להישאר בינתיים רק עם הכרטיס?<span class="answer-line"></span></div>
+
+    <h3>מה קורה אחרי שיפית עונה</h3>
+    <table>
+      <thead><tr><th>קיבלנו</th><th>נבנה</th></tr></thead>
+      <tbody>
+        <tr><td>חלק א' (מספרים)</td><td>יעד תפוסה מדויק + כמה לקוחות חדשים/חודש בדיוק</td></tr>
+        <tr><td>חלק ב' (מחיר)</td><td>החלטת מחיר/חבילה — ההכנסה הכי גבוהה על אותו זמן</td></tr>
+        <tr><td>חלק ד' (אמון)</td><td>הודעה לרשת החמה + תסריט בקשת הפניה + ציטוטים אמיתיים</td></tr>
+        <tr><td>חלק ה' (מסר)</td><td>מסר אחיד באתר ובכרטיס</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footnote">יפית מוכתרי · מטפלת הוליסטית גוף-נפש · תל אביב · card.yaffholistic.com · מסמך עבודה פנימי, 30.6.2026</div>
+  </section>
+
+</body>
+</html>
