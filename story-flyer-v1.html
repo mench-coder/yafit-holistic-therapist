@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>יפית מוכתרי — סטורי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Frank+Ruhl+Libre:wght@300;400;500&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #FBFBF9;
+      --mist:     #EEF1EC;
+      --sky:      #D8E4E2;
+      --sage:     #7E957F;
+      --sage-dk:  #54684F;
+      --ink:      #28302B;
+      --ink-soft: #76807A;
+      --line:     #E2E5DF;
+      --f-display:'Frank Ruhl Libre', Georgia, serif;
+      --f-deco:   'Cormorant Garamond', Georgia, serif;
+      --f-body:   'Assistant', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1080px; height: 1920px; }
+    body {
+      font-family: var(--f-body);
+      background: var(--bg);
+      color: var(--ink);
+      direction: rtl;
+      position: relative;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---- background decor ---- */
+    .botanical-bottom {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 560px;
+      background: url('assets/images/styled/flowers-beige.png') center bottom / cover no-repeat;
+      opacity: 0.5;
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 48%, transparent 100%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 48%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .halo {
+      position: absolute;
+      width: 1280px; height: 1280px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      top: 360px; left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .halo-2 {
+      position: absolute;
+      width: 980px; height: 980px;
+      border-radius: 50%;
+      border: 1.5px solid var(--line);
+      top: 510px; left: 50%;
+      transform: translateX(-50%);
+      opacity: 0.6;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow {
+      position: absolute;
+      width: 820px; height: 820px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--mist), transparent 70%);
+      top: -220px; right: -200px;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .glow-2 {
+      position: absolute;
+      width: 640px; height: 640px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--sky), transparent 70%);
+      opacity: 0.45;
+      bottom: 120px; left: -220px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ---- layout ---- */
+    .stage {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 132px 110px 120px;
+    }
+
+    .kicker {
+      font-size: 27px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--ink-soft);
+      text-transform: none;
+    }
+    .kicker .dot { color: var(--sage); margin: 0 0.5em; }
+
+    /* photo */
+    .photo-wrap { position: relative; width: 470px; height: 470px; margin: 84px auto 70px; }
+    .photo-wrap::before {
+      content: '';
+      position: absolute; inset: -26px;
+      border-radius: 50%;
+      border: 2px solid var(--sage);
+      opacity: 0.45;
+    }
+    .ring {
+      position: absolute; inset: -60px;
+      border-radius: 50%;
+      border: 2px dashed var(--sage);
+      opacity: 0.4;
+    }
+    .ring::after {
+      content: '';
+      position: absolute;
+      top: -10px; left: 50%;
+      transform: translateX(-50%);
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--sage-dk);
+      box-shadow: 0 0 0 9px rgba(126,149,127,0.16);
+    }
+    .ring-2 {
+      position: absolute; inset: -96px;
+      border-radius: 50%;
+      border: 1.5px dotted var(--line);
+      opacity: 0.9;
+    }
+    .photo {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 36px 90px rgba(40,48,43,0.16);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+
+    h1 {
+      font-family: var(--f-display);
+      font-weight: 400;
+      font-size: 96px;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+    }
+    .role {
+      font-size: 33px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--ink-soft);
+      margin-bottom: 54px;
+    }
+    .role b { color: var(--sage-dk); font-weight: 600; }
+
+    .tagline {
+      font-family: var(--f-deco);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 62px;
+      line-height: 1.32;
+      color: var(--sage-dk);
+      margin: 0 auto 44px;
+      max-width: 760px;
+    }
+    .tagline em { font-style: italic; font-weight: 500; color: var(--ink); }
+
+    .breath { display: flex; align-items: center; justify-content: center; gap: 18px; margin-bottom: 46px; }
+    .breath span { width: 13px; height: 13px; border-radius: 50%; background: var(--sage); opacity: 0.5; }
+    .breath span:nth-child(2) { transform: scale(1.5); opacity: 0.85; }
+
+    .methods {
+      font-size: 32px;
+      font-weight: 400;
+      line-height: 1.72;
+      color: var(--ink-soft);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    .methods b { font-weight: 600; color: var(--ink); }
+
+    .spacer { flex: 1 1 auto; }
+
+    /* CTA block pinned near bottom */
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: linear-gradient(135deg, var(--sage), var(--sage-dk));
+      color: #fff;
+      font-size: 40px;
+      font-weight: 700;
+      border-radius: 28px;
+      padding: 34px 56px;
+      box-shadow: 0 26px 60px rgba(84,104,79,0.32);
+    }
+    .cta svg { width: 44px; height: 44px; flex-shrink: 0; }
+
+    .link {
+      margin-top: 34px;
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--sage-dk);
+    }
+    .link .arrow { display: inline-block; margin-inline-start: 10px; }
+    .sub {
+      margin-top: 12px;
+      font-size: 25px;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+  </style>
+</head>
+<body>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="glow-2" aria-hidden="true"></div>
+  <div class="halo" aria-hidden="true"></div>
+  <div class="halo-2" aria-hidden="true"></div>
+  <div class="botanical-bottom" aria-hidden="true"></div>
+
+  <div class="stage">
+    <p class="kicker">מטפלת הוליסטית גוף-נפש <span class="dot">·</span> קליניקה בתל אביב</p>
+
+    <div class="photo-wrap">
+      <span class="ring-2"></span>
+      <span class="ring"></span>
+      <div class="photo"><img src="assets/images/styled/yafit-3-circle-beige2.jpeg" alt="יפית מוכתרי" /></div>
+    </div>
+
+    <h1>יפית מוכתרי</h1>
+    <p class="role">מלווה בתהליך גוף-נפש <b>· 15 שנות ניסיון</b></p>
+
+    <p class="tagline">כשהגוף נרגע,<br /><em>הנפש מתחילה לדבר</em></p>
+
+    <div class="breath"><span></span><span></span><span></span></div>
+
+    <p class="methods">
+      ליווי דרך <b>שיחה, מגע, רייקי, מדיטציה ודמיון מודרך</b><br />
+      כדי לשחרר את מה שכבר לא צריך להחזיק.
+    </p>
+
+    <div class="spacer"></div>
+
+    <div class="cta">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      זמינה לשיחת היכרות — בואו נדבר
+    </div>
+
+    <p class="link">card.yaffholistic.com <span class="arrow">←</span></p>
+    <p class="sub">הקליקו על הקישור בפרופיל</p>
+  </div>
+</body>
+</html>
