@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>יפית מוכתרי · מוקאפ אתר — המעגל הנושם</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Frank+Ruhl+Libre:wght@300;400;500&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #FBFBF9;
+      --mist:     #EEF1EC;
+      --sky:      #D8E4E2;
+      --sage:     #7E957F;
+      --sage-dk:  #54684F;
+      --sand:     #C9B79C;
+      --ink:      #28302B;
+      --ink-soft: #76807A;
+      --line:     #E2E5DF;
+      --wa:       #22BC5B;
+      --f-display:'Frank Ruhl Libre', Georgia, serif;
+      --f-deco:   'Cormorant Garamond', Georgia, serif;
+      --f-body:   'Assistant', Arial, sans-serif;
+      --stage: min(92vmin, 600px);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: var(--f-body);
+      background:
+        radial-gradient(120% 90% at 50% -10%, #FFFFFF 0%, var(--bg) 42%, #F3F2EC 100%);
+      color: var(--ink);
+      direction: rtl;
+      min-height: 100svh;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- botanical perimeter: stronger near the circle, faint behind ---------- */
+    .botanical {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    }
+    .botanical span {
+      position: absolute;
+      background: url('assets/images/styled/flowers-beige.png') center / cover no-repeat;
+    }
+    .fl-tr { top: -4%; right: -6%; width: 46vmin; height: 46vmin;
+      transform: scaleX(-1) rotate(8deg); opacity: .5;
+      -webkit-mask-image: radial-gradient(circle at 70% 60%, #000 30%, transparent 72%);
+              mask-image: radial-gradient(circle at 70% 60%, #000 30%, transparent 72%); }
+    .fl-bl { bottom: -6%; left: -6%; width: 52vmin; height: 52vmin;
+      transform: rotate(6deg); opacity: .58;
+      -webkit-mask-image: radial-gradient(circle at 40% 40%, #000 28%, transparent 72%);
+              mask-image: radial-gradient(circle at 40% 40%, #000 28%, transparent 72%); }
+    .fl-tl { top: -3%; left: -8%; width: 34vmin; height: 34vmin;
+      transform: scaleY(-1) rotate(-4deg); opacity: .32;
+      -webkit-mask-image: radial-gradient(circle at 60% 60%, #000 25%, transparent 70%);
+              mask-image: radial-gradient(circle at 60% 60%, #000 25%, transparent 70%); }
+
+    /* ---------- top wordmark (quiet, no menu) ---------- */
+    header {
+      position: relative; z-index: 5;
+      text-align: center;
+      padding: clamp(1.4rem, 4vh, 2.6rem) 1.2rem 0;
+    }
+    .wordmark { font-family: var(--f-display); font-weight: 400; font-size: 1.25rem; letter-spacing: .01em; color: var(--ink); }
+    .subrole  { font-size: .8rem; font-weight: 500; letter-spacing: .14em; color: var(--ink-soft); margin-top: .25rem; }
+
+    /* ---------- the breathing stage ---------- */
+    .stage-wrap {
+      position: relative; z-index: 2;
+      display: grid; place-items: center;
+      min-height: calc(100svh - 8.5rem);
+      padding: 1rem;
+    }
+    .stage {
+      position: relative;
+      width: var(--stage); height: var(--stage);
+      display: grid; place-items: center;
+    }
+
+    /* faint concentric horizon rings */
+    .stage::before, .stage::after {
+      content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+      border: 1px solid var(--line);
+    }
+    .stage::before { inset: 2%; }
+    .stage::after  { inset: 12%; opacity: .6; }
+
+    /* slow rotating dashed ring with an orbiting bead (echo of the card) */
+    .orbit-ring {
+      position: absolute; inset: 6%; border-radius: 50%;
+      border: 1.5px dashed var(--sage); opacity: .42;
+      animation: spin 52s linear infinite;
+    }
+    .orbit-ring::after {
+      content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%);
+      width: 11px; height: 11px; border-radius: 50%; background: var(--sage-dk);
+      box-shadow: 0 0 0 5px rgba(126,149,127,.16);
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* the living orb — breathes */
+    .orb {
+      position: relative;
+      width: 47%; height: 47%;
+      border-radius: 50%;
+      display: grid; place-items: center; text-align: center;
+      background:
+        radial-gradient(circle at 38% 32%, #FFFFFF 0%, var(--mist) 40%, var(--sky) 78%, #BFD2CE 100%);
+      box-shadow:
+        0 24px 60px rgba(84,104,79,.20),
+        inset 0 2px 14px rgba(255,255,255,.85);
+      animation: breathe 7s ease-in-out infinite;
+      cursor: default;
+    }
+    .orb::before { /* soft aura */
+      content: ''; position: absolute; inset: -14%; border-radius: 50%;
+      background: radial-gradient(circle, rgba(126,149,127,.18), transparent 68%);
+      animation: aura 7s ease-in-out infinite;
+    }
+    @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.055); } }
+    @keyframes aura    { 0%,100% { transform: scale(1); opacity: .65; } 50% { transform: scale(1.12); opacity: .95; } }
+
+    .orb-inner { position: relative; z-index: 2; padding: 0 12%; }
+    .orb-prompt {
+      font-family: var(--f-deco); font-style: italic; font-weight: 500;
+      font-size: clamp(1.15rem, 3.6vmin, 1.7rem); line-height: 1.4; color: var(--sage-dk);
+    }
+    .orb-hint { font-size: clamp(.7rem, 1.9vmin, .84rem); color: var(--ink-soft); margin-top: .5rem; letter-spacing: .02em; }
+
+    /* ---------- symptom chips arranged around the circle ---------- */
+    .symptoms { position: absolute; inset: 0; }
+    .chip {
+      position: absolute; top: 50%; left: 50%;
+      --r: calc(var(--stage) * 0.40);
+      transform: rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a)));
+      transform-origin: 0 0;
+    }
+    .chip button {
+      transform: translate(-50%, -50%);
+      font-family: var(--f-body); font-size: clamp(.82rem, 2.1vmin, 1rem); font-weight: 500;
+      color: var(--ink);
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: .5rem 1.05rem;
+      white-space: nowrap;
+      cursor: pointer;
+      backdrop-filter: blur(3px);
+      box-shadow: 0 6px 18px rgba(40,48,43,.07);
+      transition: transform .25s ease, background .25s, color .25s, border-color .25s, box-shadow .25s;
+      animation: float 6s ease-in-out infinite;
+    }
+    .chip:nth-child(2) button { animation-delay: .6s; }
+    .chip:nth-child(3) button { animation-delay: 1.2s; }
+    .chip:nth-child(4) button { animation-delay: 1.8s; }
+    .chip:nth-child(5) button { animation-delay: 2.4s; }
+    .chip:nth-child(6) button { animation-delay: 3s; }
+    .chip:nth-child(7) button { animation-delay: 3.6s; }
+    @keyframes float { 0%,100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+    .chip button:hover {
+      background: linear-gradient(135deg, var(--sage), var(--sage-dk));
+      color: #fff; border-color: transparent;
+      box-shadow: 0 10px 26px rgba(84,104,79,.34);
+    }
+
+    /* ---------- response panel (Yafit's voice) ---------- */
+    .response {
+      position: absolute; inset: 0; z-index: 6;
+      display: grid; place-items: center; text-align: center;
+      padding: 7% 9%;
+      opacity: 0; visibility: hidden; pointer-events: none;
+      transition: opacity .55s ease;
+    }
+    .response.show { opacity: 1; visibility: visible; pointer-events: auto; }
+    .response-card { max-width: 30rem; }
+    .resp-avatar {
+      width: 64px; height: 64px; border-radius: 50%; overflow: hidden; margin: 0 auto .9rem;
+      box-shadow: 0 10px 26px rgba(40,48,43,.18); border: 2px solid rgba(255,255,255,.9);
+    }
+    .resp-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center 16%; }
+    .resp-symptom {
+      font-size: .78rem; font-weight: 600; letter-spacing: .16em; color: var(--sage-dk);
+      text-transform: none; margin-bottom: .55rem;
+    }
+    .resp-text {
+      font-family: var(--f-deco); font-style: italic; font-weight: 500;
+      font-size: clamp(1.15rem, 3.4vmin, 1.55rem); line-height: 1.55; color: var(--ink);
+    }
+    .resp-actions { margin-top: 1.4rem; display: flex; flex-direction: column; gap: .55rem; align-items: center; }
+    .btn-wa {
+      display: inline-flex; align-items: center; justify-content: center; gap: .55rem;
+      background: linear-gradient(135deg, var(--sage), var(--sage-dk)); color: #fff;
+      font-weight: 700; font-size: 1rem; border: none; border-radius: 14px;
+      padding: .8rem 1.6rem; cursor: pointer; box-shadow: 0 12px 30px rgba(84,104,79,.32);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(84,104,79,.42); }
+    .btn-wa svg { width: 19px; height: 19px; }
+    .btn-back {
+      background: none; border: none; color: var(--ink-soft); font-family: var(--f-body);
+      font-size: .9rem; font-weight: 500; cursor: pointer; padding: .4rem .8rem;
+      transition: color .2s;
+    }
+    .btn-back:hover { color: var(--sage-dk); }
+
+    /* dim chips + prompt while a response is open */
+    .stage.answering .symptoms,
+    .stage.answering .orb-inner { opacity: 0; pointer-events: none; transition: opacity .4s; }
+    .symptoms, .orb-inner { transition: opacity .4s; }
+
+    /* ---------- quiet footer cue ---------- */
+    .footer-cue {
+      position: relative; z-index: 5; text-align: center;
+      padding: 0 1.2rem clamp(1.4rem, 4vh, 2.4rem);
+      font-size: .85rem; color: var(--ink-soft);
+    }
+    .footer-cue b { color: var(--sage-dk); font-weight: 600; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .orb, .orb::before, .orbit-ring, .chip button { animation: none !important; }
+    }
+    @media (max-width: 460px) {
+      :root { --stage: 94vw; }
+      .chip { --r: calc(var(--stage) * 0.39); }
+      .chip button { padding: .45rem .85rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="botanical" aria-hidden="true">
+    <span class="fl-tr"></span>
+    <span class="fl-bl"></span>
+    <span class="fl-tl"></span>
+  </div>
+
+  <header>
+    <div class="wordmark">יפית מוכתרי</div>
+    <div class="subrole">מטפלת הוליסטית · גוף–נפש</div>
+  </header>
+
+  <div class="stage-wrap">
+    <div class="stage" id="stage">
+      <span class="orbit-ring" aria-hidden="true"></span>
+
+      <div class="orb">
+        <div class="orb-inner">
+          <div class="orb-prompt">מה עולה בך<br/>עכשיו?</div>
+          <div class="orb-hint">געי במה שמרגיש קרוב</div>
+        </div>
+      </div>
+
+      <div class="symptoms" id="symptoms" role="list" aria-label="מה מרגישים כרגע"></div>
+
+      <div class="response" id="response" aria-live="polite">
+        <div class="response-card">
+          <div class="resp-avatar"><img src="assets/images/styled/yafit-3-circle-beige2.jpeg" alt="יפית מוכתרי" /></div>
+          <div class="resp-symptom" id="respSymptom"></div>
+          <div class="resp-text" id="respText"></div>
+          <div class="resp-actions">
+            <a class="btn-wa" id="respWa" target="_blank" rel="noopener" href="#">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              אני כאן, בואו נדבר
+            </a>
+            <button class="btn-back" id="respBack" type="button">חזרה למעגל</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cue">
+    כל מפגש נבנה לפי מה שעולה בך באותו רגע · <b>קליניקה בתל אביב</b>
+  </div>
+
+  <script>
+    var PHONE = '972547744141';
+
+    /* Yafit's voice — calm, "between the lines" responses per symptom.
+       Order defines placement around the circle (starting top, clockwise). */
+    var SYMPTOMS = [
+      { key: 'לחץ',        text: 'הלחץ הזה הוא לא מי שאת. הוא רק סימן שמשהו בפנים מבקש רגע של שקט. בואי נעצור יחד, ונקשיב למה שהגוף מנסה לומר.' },
+      { key: 'חרדה',       text: 'החרדה לא באה להפחיד אותך. היא דופקת בדלת כי משהו בתוכך מבקש תשומת לב. לא נברח ממנה — ננשום, ונלמד להקשיב לה ברוך.' },
+      { key: 'עייפות',     text: 'לפעמים העייפות היא לא חוסר שינה, אלא של מי שמחזיק יותר מדי, יותר מדי זמן. מותר להניח. מותר לתת לגוף לנוח באמת.' },
+      { key: 'כאב פיזי',    text: 'הגוף לא ממציא כאב. הוא מדבר בשפה שהוא מכיר. כשנקשיב לו בעדינות, נגלה מה הוא מבקש לשחרר — והכאב מתחיל להתרכך.' },
+      { key: 'תקיעות',     text: 'תקיעות היא לא סוף הדרך. היא רגע של עצירה לפני תנועה חדשה. יחד נמצא את הנקודה שבה אפשר שוב לזוז, בקצב שלך.' },
+      { key: 'עומס רגשי',  text: 'לא חייבים להחזיק את הכל לבד. כשניתן לרגש מקום לנשום, הוא מפסיק ללחוץ מבפנים. בואי נפנה לזה מרחב.' },
+      { key: 'חוסר שקט',   text: 'השקט לא נמצא אי-שם בחוץ. הוא מחכה בתוכך, מתחת לרעש. נלמד יחד איך לחזור אליו, רגע אחרי רגע.' }
+    ];
+
+    var symptomsEl = document.getElementById('symptoms');
+    var stage = document.getElementById('stage');
+    var response = document.getElementById('response');
+    var respText = document.getElementById('respText');
+    var respSymptom = document.getElementById('respSymptom');
+    var respWa = document.getElementById('respWa');
+    var respBack = document.getElementById('respBack');
+
+    /* place chips evenly around the circle */
+    var n = SYMPTOMS.length;
+    SYMPTOMS.forEach(function (s, i) {
+      var angle = (360 / n) * i; /* 0deg = top */
+      var chip = document.createElement('div');
+      chip.className = 'chip';
+      chip.setAttribute('role', 'listitem');
+      chip.style.setProperty('--a', angle + 'deg');
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = s.key;
+      btn.addEventListener('click', function () { openResponse(s); });
+      chip.appendChild(btn);
+      symptomsEl.appendChild(chip);
+    });
+
+    function waLink(symptom) {
+      var msg = 'היי יפית, הגעתי דרך האתר. מה שעלה בי הוא ' + symptom + '. אשמח לדבר.';
+      return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
+    }
+
+    function openResponse(s) {
+      respSymptom.textContent = s.key;
+      respText.textContent = '"' + s.text + '"';
+      respWa.href = waLink(s.key);
+      stage.classList.add('answering');
+      response.classList.add('show');
+    }
+    function closeResponse() {
+      response.classList.remove('show');
+      stage.classList.remove('answering');
+    }
+    respBack.addEventListener('click', closeResponse);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeResponse(); });
+
+    /* demo helper: #open=<symptom> auto-opens a response (used for previews) */
+    (function () {
+      var m = decodeURIComponent(location.hash.replace(/^#open=/, ''));
+      var found = SYMPTOMS.filter(function (s) { return s.key === m; })[0];
+      if (found) setTimeout(function () { openResponse(found); }, 300);
+    })();
+  </script>
+</body>
+</html>
