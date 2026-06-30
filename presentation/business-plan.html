@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>תוכנית עבודה אסטרטגית — יפית מוכתרי</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cream: #FDFCF9;
+      --sand-50: #F5EFE6;
+      --sand-100: #EDE0CC;
+      --bark: #5C3D26;
+      --soil: #3A2215;
+      --sage: #6B7C5A;
+      --sage-light: #97A886;
+      --bronze: #B8873A;
+      --bronze-light: #D4A85C;
+      --charcoal: #2C1C0E;
+      --charcoal-lt: #6B5440;
+      --muted: #9A7860;
+      --font-display: 'Frank Ruhl Libre', Georgia, serif;
+      --font-deco: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Assistant', Arial, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: var(--font-body);
+      background: var(--soil);
+      color: var(--charcoal);
+      direction: rtl;
+    }
+
+    .deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 3.5rem 5rem 4.5rem;
+      background: var(--cream);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(40px);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+      z-index: 2;
+    }
+
+    .slide.dark {
+      background: linear-gradient(145deg, var(--soil) 0%, #2a1810 55%, var(--bark) 100%);
+      color: var(--cream);
+    }
+
+    .slide.sage {
+      background: linear-gradient(160deg, #5a6b4c 0%, var(--sage) 100%);
+      color: var(--cream);
+    }
+
+    .slide.sand {
+      background: linear-gradient(180deg, var(--sand-50) 0%, var(--cream) 100%);
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--bronze);
+      margin-bottom: 0.75rem;
+    }
+
+    .slide.dark .eyebrow,
+    .slide.sage .eyebrow { color: var(--bronze-light); }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 500;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+      font-weight: 500;
+      line-height: 1.2;
+      margin-bottom: 1.25rem;
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--bark);
+    }
+
+    .slide.dark h3,
+    .slide.sage h3 { color: var(--bronze-light); }
+
+    .subtitle {
+      font-family: var(--font-deco);
+      font-size: clamp(1.1rem, 2vw, 1.45rem);
+      color: var(--charcoal-lt);
+      max-width: 42rem;
+      line-height: 1.55;
+    }
+
+    .slide.dark .subtitle,
+    .slide.sage .subtitle { color: rgba(253, 252, 249, 0.82); }
+
+    .divider {
+      width: 3.5rem;
+      height: 2px;
+      background: var(--bronze);
+      margin: 1.25rem 0 1.75rem;
+    }
+
+    .slide.dark .divider,
+    .slide.sage .divider { background: var(--bronze-light); }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    li {
+      position: relative;
+      padding-right: 1.25rem;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      color: var(--charcoal);
+    }
+
+    .slide.dark li,
+    .slide.sage li { color: rgba(253, 252, 249, 0.92); }
+
+    li::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0.65em;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+    }
+
+    .slide.dark li::before,
+    .slide.sage li::before { background: var(--bronze-light); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem 2.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--sand-100);
+      border-radius: 12px;
+      padding: 1.25rem 1.35rem;
+    }
+
+    .slide.dark .card,
+    .slide.sage .card {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .card-num {
+      font-family: var(--font-deco);
+      font-size: 2rem;
+      color: var(--bronze);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .slide.dark .card-num,
+    .slide.sage .card-num { color: var(--bronze-light); }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-text {
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--charcoal-lt);
+    }
+
+    .slide.dark .card-text,
+    .slide.sage .card-text { color: rgba(253, 252, 249, 0.78); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin-top: 0.75rem;
+    }
+
+    th, td {
+      padding: 0.65rem 0.85rem;
+      text-align: right;
+      border-bottom: 1px solid var(--sand-100);
+      vertical-align: top;
+    }
+
+    th {
+      font-weight: 600;
+      color: var(--bark);
+      background: var(--sand-50);
+    }
+
+    .slide.dark th {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--bronze-light);
+    }
+
+    .slide.dark td { border-color: rgba(255, 255, 255, 0.1); }
+
+    .tag {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    .tag-red { background: #fde8e8; color: #9b2c2c; }
+    .tag-yellow { background: #fef3cd; color: #856404; }
+    .tag-green { background: #e8f3e4; color: var(--sage); }
+
+    .quote {
+      font-family: var(--font-deco);
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--bark);
+      border-right: 3px solid var(--bronze);
+      padding-right: 1.25rem;
+      margin: 1rem 0;
+      max-width: 38rem;
+    }
+
+    .slide.dark .quote,
+    .slide.sage .quote {
+      color: var(--cream);
+      border-color: var(--bronze-light);
+    }
+
+    .hero-meta {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .slide.dark .hero-meta { color: rgba(253, 252, 249, 0.55); }
+
+    /* Title slide */
+    .title-slide {
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .title-slide h1 { font-size: clamp(2.5rem, 5vw, 4rem); max-width: 14ch; }
+    .title-slide .brand-line {
+      font-family: var(--font-deco);
+      font-size: 1.2rem;
+      color: var(--sage);
+      margin-top: 0.5rem;
+    }
+
+    .slide.dark .brand-line { color: var(--sage-light); }
+
+    /* Controls */
+    .controls {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      z-index: 100;
+      background: rgba(44, 28, 14, 0.88);
+      backdrop-filter: blur(8px);
+      padding: 0.55rem 1.1rem;
+      border-radius: 999px;
+      color: var(--cream);
+      font-size: 0.82rem;
+    }
+
+    .controls button {
+      background: none;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--cream);
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    .controls button:hover { background: rgba(255, 255, 255, 0.12); }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 3px;
+      background: var(--bronze);
+      z-index: 100;
+      transition: width 0.35s ease;
+    }
+
+    .slide-num {
+      position: fixed;
+      top: 1.25rem;
+      left: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      z-index: 50;
+    }
+
+    .slide.dark ~ .slide-num,
+    body:has(.slide.active.dark) .slide-num,
+    body:has(.slide.active.sage) .slide-num { color: rgba(253, 252, 249, 0.45); }
+
+    .checklist li::before { content: '☐'; background: none; top: 0; font-size: 0.85rem; color: var(--sage); }
+
+    .phase-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--bronze);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+    }
+
+    @media (max-width: 900px) {
+      .slide { padding: 2.5rem 1.75rem 5rem; }
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .controls { bottom: 1rem; padding: 0.45rem 0.85rem; }
+    }
+
+    @media print {
+      html, body { overflow: visible; height: auto; }
+      .deck { height: auto; }
+      .slide {
+        position: relative;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        page-break-after: always;
+        min-height: 100vh;
+        break-after: page;
+      }
+      .controls, .progress-bar, .slide-num { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar" id="progress"></div>
+  <div class="slide-num" id="slideNum">1 / 24</div>
+
+  <div class="deck" id="deck">
+
+    <!-- 1 -->
+    <section class="slide dark title-slide active">
+      <span class="eyebrow">תוכנית עבודה אסטרטגית · יוני 2026</span>
+      <h1>יפית מוכתרי<br />מטפלת הוליסטית גוף-נפש</h1>
+      <div class="divider"></div>
+      <p class="subtitle">מסמך אסטרטגיה, שיווק, תפעול ודיגיטל — למילוי יומן הקליניקה החדשה בתל אביב</p>
+      <p class="hero-meta">מטרת על: שיחות היכרות → מפגשים → לקוחות חוזרים · יוני 2026</p>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide sand">
+      <span class="eyebrow">תוכן עניינים</span>
+      <h2>מה נכסה במצגת</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <ul>
+          <li>תמצית מנהלים ו-3 ההימורים הגדולים</li>
+          <li>מצב נוכחי — נכסים, פערים, בגרות</li>
+          <li>מיצוב, קהל יעד והבדלה מול שוק</li>
+          <li>מודל הצעה ומסע לקוח</li>
+        </ul>
+        <ul>
+          <li>שיווק, תוכן ונוכחות דיגיטלית</li>
+          <li>תפעול, KPIs ותקציב</li>
+          <li>סיכונים ו-Roadmap 90 יום</li>
+          <li>אבני דרך 12 חודשים והחלטות פתוחות</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide">
+      <span class="eyebrow">תמצית מנהלים</span>
+      <h2>North Star</h2>
+      <div class="divider"></div>
+      <p class="quote">מילוי יומן הקליניקה — לא "עוד נכסים דיגיטליים", אלא הפעלה, מדידה ואמון.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-num">01</div>
+          <div class="card-title">שער כניסה</div>
+          <div class="card-text">שיחת היכרות בווטסאפ — ללא התחייבות</div>
+        </div>
+        <div class="card">
+          <div class="card-num">02</div>
+          <div class="card-title">מנוע המרה</div>
+          <div class="card-text">כרטיס דיגיטלי מאושר → card.yaffholistic.com</div>
+        </div>
+        <div class="card">
+          <div class="card-num">03</div>
+          <div class="card-title">יעד ראשוני</div>
+          <div class="card-text">4–6 לקוחות חדשים/חודש → 8–10 תוך 6 חודשים</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide sage">
+      <span class="eyebrow">אסטרטגיה</span>
+      <h2>3 ההימורים הגדולים</h2>
+      <div class="divider"></div>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-title">מנוע המרה אחד</div>
+          <div class="card-text">כל הפעילות מובילה לווטסאפ — לא לטופס, לא ל"אתר" כשער ראשי. הכרטיס כבר חי ומאושר.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">אמון לפני תנועה</div>
+          <div class="card-text">בשוק הוליסטי בת"א ההחלטה היא "האם אני סומכ/ת עליה?" — ציטוטים אמיתיים, IG פעיל, עקביות.</div>
+        </div>
+        <div class="card">
+          <div class="card-title">מוצר מוגדר</div>
+          <div class="card-text">התאמה אישית = יתרון, אבל לקוח חדש צריך מסגרת: מה קורה בהיכרות, במפגש ראשון, בתהליך.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide">
+      <span class="eyebrow">מצב נוכחי</span>
+      <h2>מה כבר קיים — חזק</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <ul>
+          <li>כרטיס ביקור דיגיטלי מאושר (card-f)</li>
+          <li>GA4 מחובר — G-ZDRSXKQDRL</li>
+          <li>דף נחיתה מלא (index.html)</li>
+          <li>פלייר, לוגו, OG לווטסאפ</li>
+        </ul>
+        <ul>
+          <li>מיתוג: "הגוף שלנו מדבר"</li>
+          <li>דומיין card.yaffholistic.com</li>
+          <li>6+ שיטות טיפול מוגדרות</li>
+          <li>CTA ווטסאפ בכל הנכסים</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide sand">
+      <span class="eyebrow">מצב נוכחי</span>
+      <h2>פערים קריטיים</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>פער</th><th>עדיפות</th><th>השפעה</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>אין ציטוטי לקוחות אמיתיים</td><td><span class="tag tag-red">גבוהה</span></td><td>פוגע באמון</td></tr>
+          <tr><td>אינסטגרם — placeholder</td><td><span class="tag tag-red">גבוהה</span></td><td>ערוץ ראשי לקהל היעד</td></tr>
+          <tr><td>15 vs 20+ שנות ניסיון</td><td><span class="tag tag-yellow">בינונית</span></td><td>חוסר עקביות</td></tr>
+          <tr><td>אין מחיר / חבילות</td><td><span class="tag tag-yellow">בינונית</span></td><td>מעכב החלטה</td></tr>
+          <tr><td>אין כתובת קליניקה</td><td><span class="tag tag-yellow">בינונית</span></td><td>Local SEO + אמון</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide">
+      <span class="eyebrow">מצב נוכחי</span>
+      <h2>ציון בגרות (0–5)</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>תחום</th><th>ציון</th><th>הערה</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>מיתוג ויזואלי</td><td>4</td><td>חזק, מאושר</td></tr>
+          <tr><td>כרטיס דיגיטלי</td><td>5</td><td>סופי, חי</td></tr>
+          <tr><td>אתר מלא</td><td>3</td><td>קיים, לא מופץ</td></tr>
+          <tr><td>שיווק / רכישה</td><td>1</td><td>כמעט לא מופעל</td></tr>
+          <tr><td>Social proof</td><td>1</td><td>חסר</td></tr>
+          <tr><td>SEO מקומי</td><td>0</td><td>לא התחיל</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide dark">
+      <span class="eyebrow">מיצוב</span>
+      <h2>קטגוריה ומשפט מיצוב</h2>
+      <div class="divider"></div>
+      <p class="subtitle" style="margin-bottom:1rem;">ליווי הוליסטי גוף-נפש — לא מסאז' רפואי, לא פסיכותרפיה קלאסית.</p>
+      <p class="quote">"כשהגוף נרגע, הנפש מתחילה לדבר — ואני מלווה את שניהם, במפגש אחד מותאם אליך."</p>
+      <p class="subtitle" style="margin-top:1.5rem; font-size:1rem;">טון: חם, מזמין, מקצועי · רפרנס: jareebasgall.com</p>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide">
+      <span class="eyebrow">קהל יעד</span>
+      <h2>ICP — Ideal Customer Profile</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div>
+          <h3>מי</h3>
+          <ul>
+            <li>נשים 35–55 (גם גברים — פחות נפוץ)</li>
+            <li>תל אביב + גוש דן</li>
+            <li>עומס, סטרס, תקיעות, "רצ/ה בלי לעצור"</li>
+          </ul>
+        </div>
+        <div>
+          <h3>מה כבר ניסו</h3>
+          <ul>
+            <li>טיפול בשיחה — לא מגיע לגוף</li>
+            <li>עיסוי — לא מגיע לרגש</li>
+            <li>מחפש/ת מרחב בטוח, לא פתרון מהיר</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide sand">
+      <span class="eyebrow">תחרות</span>
+      <h2>הבדלה מול השוק</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>רוב המתחרים</th><th>יפית</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>כלי אחד מרכזי</td><td>6+ כלים, שילוב דינמי</td></tr>
+          <tr><td>ספיריטואלי / קליני בלבד</td><td>חם + מקצועי</td></tr>
+          <tr><td>פרוטוקול קבוע</td><td>"כל מפגש נראה אחרת"</td></tr>
+          <tr><td>ניסיון בנפש או בגוף</td><td>15–20 שנה בגוף + כלים נפשיים</td></tr>
+          <tr><td>רקע רפואי</td><td>רקע רקדנית — שפת גוף</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide">
+      <span class="eyebrow">הצעה</span>
+      <h2>מודל שירות מומלץ</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="phase-label">שער כניסה</div>
+          <div class="card-title">שיחת היכרות</div>
+          <div class="card-text">15–20 דק' · טלפון/ווטסאפ/זום · ללא התחייבות</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">מוצר ליבה</div>
+          <div class="card-title">מפגש בודד</div>
+          <div class="card-text">60–90 דק' · "טעימה" · NLP, רייקי, שיאצו, באך, הילינג</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">מוצר עיקרי</div>
+          <div class="card-title">תהליך ליווי</div>
+          <div class="card-text">6–10 מפגשים · שינוי עמוק · LTV גבוה</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">המשך</div>
+          <div class="card-title">תחזוקה / חידוש</div>
+          <div class="card-text">Retention · המלצות · מפגשי רענון</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide sage">
+      <span class="eyebrow">הצעה</span>
+      <h2>Value Equation — איפה לחזק</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>מנוף</th><th>מצב</th><th>פעולה</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>תוצאה חלומית ↑</td><td><span class="tag tag-green">חזק</span></td><td>שחרור, איזון, חיבור לעצמי</td></tr>
+          <tr><td>סבירות הצלחה ↑</td><td><span class="tag tag-red">חלש</span></td><td>ציטוטים, סיפורים, תהליך ברור</td></tr>
+          <tr><td>זמן לתוצאה ↓</td><td><span class="tag tag-yellow">בינוני</span></td><td>"מה קורה במפגש הראשון"</td></tr>
+          <tr><td>מאמץ ↓</td><td><span class="tag tag-green">חזק</span></td><td>אין תבנית, שיחה לפני, בלי לחץ</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide">
+      <span class="eyebrow">לקוח</span>
+      <h2>מסע לקוח</h2>
+      <div class="divider"></div>
+      <ul>
+        <li><strong>מודעות</strong> — IG / המלצה / Google / פלייר QR</li>
+        <li><strong>כרטיס</strong> — card.yaffholistic.com</li>
+        <li><strong>ווטסאפ</strong> — הודעה אוטומטית + תגובה תוך 4 שעות</li>
+        <li><strong>שיחת היכרות</strong> — 15 דק', בלי מכירה</li>
+        <li><strong>מפגש ראשון</strong> → follow-up יום+1</li>
+        <li><strong>תהליך / מפגש בודד</strong> → תחזוקה / המלצה</li>
+      </ul>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide sand">
+      <span class="eyebrow">שיווק</span>
+      <h2>ערוצי רכישה — Bootstrapped</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>ערוץ</th><th>פוטנציאל</th><th>סטטוס</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>המלצות / ווטסאפ</td><td>⭐⭐⭐⭐⭐</td><td>קיים — לחזק</td></tr>
+          <tr><td>אינסטגרם</td><td>⭐⭐⭐⭐</td><td>❌ להפעיל</td></tr>
+          <tr><td>Google Business</td><td>⭐⭐⭐⭐</td><td>❌ ליצור</td></tr>
+          <tr><td>SEO מקומי</td><td>⭐⭐⭐</td><td>❌ לתכנן</td></tr>
+          <tr><td>שיתופי פעולה</td><td>⭐⭐⭐⭐</td><td>❌ יוגה, קואצ'ים</td></tr>
+          <tr><td>פרסום ממומן</td><td>⭐⭐</td><td>רק אחרי baseline</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide">
+      <span class="eyebrow">דיגיטל</span>
+      <h2>Roadmap דיגיטלי — שלב 1 (שבועות 1–4)</h2>
+      <div class="divider"></div>
+      <ul class="checklist">
+        <li>לאחד 15/20+ שנות ניסיון בכל הנכסים</li>
+        <li>3–5 ציטוטים אמיתיים מלקוחות</li>
+        <li>הפעלת אינסטגרם + bio עם לינק לכרטיס</li>
+        <li>Google Business Profile</li>
+        <li>GA4 events — click_whatsapp</li>
+        <li>תסריט שיחת היכרות</li>
+      </ul>
+    </section>
+
+    <!-- 16 -->
+    <section class="slide">
+      <span class="eyebrow">דיגיטל</span>
+      <h2>Roadmap דיגיטלי — שלב 2–3 (חודש 2–6)</h2>
+      <div class="divider"></div>
+      <ul class="checklist">
+        <li>12 פוסטי IG + stories שבועיים</li>
+        <li>Schema.org + SEO באתר</li>
+        <li>עדכון index.html — ציטוטים, IG, שנות ניסיון</li>
+        <li>2 שיתופי פעולה (סטודיו יוגה / מטפל/ת)</li>
+        <li>פרסום yaffholistic.com (אתר מלא)</li>
+        <li>4 מאמרי SEO + וידאו "מי אני"</li>
+      </ul>
+    </section>
+
+    <!-- 17 -->
+    <section class="slide dark">
+      <span class="eyebrow">תוכן</span>
+      <h2>אינסטגרם — 4 פילars</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <ul>
+          <li><strong>חינוך</strong> — "למה הגוף כואב כשיש סטרס?" (1×/שבוע)</li>
+          <li><strong>אישי</strong> — סיפור מהקליניקה, אנונימי (1×/שבוע)</li>
+        </ul>
+        <ul>
+          <li><strong>Behind the scenes</strong> — קליניקה, כלים (1×/שבוע)</li>
+          <li><strong>CTA</strong> — שיחת היכרות, לינק בביו (כל 2–3 פוסטים)</li>
+        </ul>
+      </div>
+      <p class="subtitle" style="margin-top:1.5rem;">יעד: 12 פוסטים/חודש · 100 עוקבים חודש 1 → 400 חודש 3</p>
+    </section>
+
+    <!-- 18 -->
+    <section class="slide sand">
+      <span class="eyebrow">תפעול</span>
+      <h2>RACI — מי עושה מה</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>תפקיד</th><th>מי</th><th>אחריות</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>בעלת העסק</td><td>יפית</td><td>טיפול, היכרות, תוכן IG, ציטוטים</td></tr>
+          <tr><td>שותף טכני/שיווקי</td><td>מנש</td><td>אתר, GA4, SEO, עיצוב, אוטומציות</td></tr>
+          <tr><td>כלים</td><td>—</td><td>ווטסאפ + Google Calendar + Sheets/Notion</td></tr>
+        </tbody>
+      </table>
+      <p class="subtitle" style="margin-top:1rem; font-size:0.95rem;">SLA: תגובה לווטסאפ עד 4 שעות · שיחת היכרות תוך 3 ימים · follow-up יום+1 אחרי מפגש</p>
+    </section>
+
+    <!-- 19 -->
+    <section class="slide">
+      <span class="eyebrow">מדידה</span>
+      <h2>KPIs</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>מדד</th><th>חודש 1</th><th>חודש 3</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>קליקים לווטסאפ (GA4)</td><td>baseline</td><td>+50%</td></tr>
+          <tr><td>שיחות היכרות</td><td>8</td><td>12</td></tr>
+          <tr><td>המרה → מפגש 1</td><td>50%+</td><td>60%+</td></tr>
+          <tr><td>לקוחות חדשים/חודש</td><td>4–6</td><td>8+</td></tr>
+          <tr><td>עוקבים IG</td><td>100</td><td>400</td></tr>
+          <tr><td>המלצות</td><td>2</td><td>5/חודש</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 20 -->
+    <section class="slide">
+      <span class="eyebrow">כספים</span>
+      <h2>תקציב — Bootstrapped</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>פריט</th><th>עלות</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>דומיין + hosting (GitHub Pages)</td><td>~0₪</td></tr>
+          <tr><td>הדפסת פלייר + QR</td><td>100–200₪ חד-פעמי</td></tr>
+          <tr><td>Google Business</td><td>0₪</td></tr>
+          <tr><td>פרסום ממומן</td><td>0₪ (לעכשיו)</td></tr>
+          <tr><td><strong>סה"כ חודשי</strong></td><td><strong>~0–50₪</strong></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 21 -->
+    <section class="slide sand">
+      <span class="eyebrow">סיכונים</span>
+      <h2>Risk Matrix</h2>
+      <div class="divider"></div>
+      <table>
+        <thead>
+          <tr><th>סיכון</th><th>מitigציה</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>אין leads</td><td>IG + GBP + שיתופי פעולה + המלצות</td></tr>
+          <tr><td>לידים לא מתאימים</td><td>שיחת היכרות מסננת</td></tr>
+          <tr><td>חוסר עקביות במסרים</td><td>product-marketing-context.md</td></tr>
+          <tr><td>ציטוטים מומצאים באתר</td><td>להסיר / להחליף מיד</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 22 -->
+    <section class="slide sage">
+      <span class="eyebrow">90 יום</span>
+      <h2>Roadmap — שבועות 1–8</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div>
+          <h3>שבועות 1–2 · Unblock</h3>
+          <ul>
+            <li>החלטות: שנות ניסיון, ציטוטים, ניסוח</li>
+            <li>עדכון נכסים + GA4 events</li>
+            <li>IG: 3 פוסטים + bio</li>
+          </ul>
+        </div>
+        <div>
+          <h3>שבועות 3–4 · Foundation</h3>
+          <ul>
+            <li>Google Business</li>
+            <li>תסריט היכרות</li>
+            <li>כרטיס ל-10 אנשים + פלייר בקליניקה</li>
+          </ul>
+        </div>
+        <div>
+          <h3>שבועות 5–8 · Velocity</h3>
+          <ul>
+            <li>2 שיתופי פעולה</li>
+            <li>8 פוסטי IG</li>
+            <li>SEO + baseline KPIs</li>
+          </ul>
+        </div>
+        <div>
+          <h3>שבועות 9–12 · Compound</h3>
+          <ul>
+            <li>החלטה: אתר מלא?</li>
+            <li>מאמרי SEO + וידאו</li>
+            <li>Retrospective</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 23 -->
+    <section class="slide">
+      <span class="eyebrow">12 חודשים</span>
+      <h2>אבני דרך רבעוניות</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="phase-label">Q3 2026</div>
+          <div class="card-title">Foundation</div>
+          <div class="card-text">4–6 לקוחות/חודש · IG פעיל · GBP</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">Q4 2026</div>
+          <div class="card-title">Growth</div>
+          <div class="card-text">8+ לקוחות/חודש · 2 שיתופי פעולה קבועים</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">Q1 2027</div>
+          <div class="card-title">Scale</div>
+          <div class="card-text">yaffholistic.com · SEO מתחיל לעבוד</div>
+        </div>
+        <div class="card">
+          <div class="phase-label">Q2 2027</div>
+          <div class="card-title">Maturity</div>
+          <div class="card-text">10–12 לקוחות/חודש · 60% הכנסה מתהליכי ליווי</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 24 -->
+    <section class="slide dark title-slide">
+      <span class="eyebrow">הצעד הבא</span>
+      <h2>8 החלטות לסגירה עם יפית</h2>
+      <div class="divider"></div>
+      <div class="grid-2">
+        <ul>
+          <li>15 או 20+ שנות ניסיון?</li>
+          <li>מחיר — לפרסם או בשיחה?</li>
+          <li>כתובת קליניקה — לפרסם?</li>
+          <li>מפגשים אונליין — כן/לא?</li>
+        </ul>
+        <ul>
+          <li>אינסטגרם — handle קיים?</li>
+          <li>3–5 ציטוטים מלקוחות</li>
+          <li>אתר מלא עכשיו או רק כרטיס?</li>
+          <li>מטרת הפלייר</li>
+        </ul>
+      </div>
+      <p class="hero-meta" style="margin-top:2rem;">← → לניווט · F למסך מלא · Ctrl+P ל-PDF</p>
+    </section>
+
+  </div>
+
+  <div class="controls">
+    <button type="button" id="prev" aria-label="הקודם">→</button>
+    <span id="counter">1 / 24</span>
+    <button type="button" id="next" aria-label="הבא">←</button>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let current = 0;
+
+    function show(index) {
+      current = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      const label = `${current + 1} / ${slides.length}`;
+      document.getElementById('counter').textContent = label;
+      document.getElementById('slideNum').textContent = label;
+      document.getElementById('progress').style.width = `${((current + 1) / slides.length) * 100}%`;
+
+      const active = slides[current];
+      const isDark = active.classList.contains('dark') || active.classList.contains('sage');
+      document.getElementById('slideNum').style.color = isDark ? 'rgba(253,252,249,0.45)' : '';
+    }
+
+    document.getElementById('next').addEventListener('click', () => show(current + 1));
+    document.getElementById('prev').addEventListener('click', () => show(current - 1));
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' || e.key === 'PageDown' || e.key === ' ') {
+        e.preventDefault();
+        show(current + 1);
+      }
+      if (e.key === 'ArrowRight' || e.key === 'PageUp') {
+        e.preventDefault();
+        show(current - 1);
+      }
+      if (e.key === 'Home') show(0);
+      if (e.key === 'End') show(slides.length - 1);
+      if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+        else document.exitFullscreen();
+      }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].screenX;
+      if (Math.abs(diff) > 50) show(diff > 0 ? current + 1 : current - 1);
+    });
+
+    show(0);
+  </script>
+</body>
+</html>
