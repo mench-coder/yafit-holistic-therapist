@@ -6,7 +6,7 @@
 
 **סטטוס: סופי. מאושר על ידי יפית. היחיד לשיתוף.**
 
-- **לינק רשמי לווטסאפ:** https://mench-coder.github.io/yafit-holistic-therapist/card-f.html?v=2
+- **לינק רשמי לווטסאפ:** https://card.yaffholistic.com/card-f.html?v=1
 - **GA4:** `G-ZDRSXKQDRL` — https://analytics.google.com/
 - **דשבורד המועצה:** https://hub.thecouncilhub.com/projects/yafit-holistic
 - **גרסאות A–E:** ארכיון בלבד — לא לשתף
@@ -98,6 +98,11 @@
 - [ ] ציטוטי מטופלים אמיתיים (הקיימים מומצאים) — לאשר מול יפית
 - [ ] דומיין משלה (למשל yafit.co.il) ל-Pages — שדרוג עתידי אופציונלי
 - [ ] **משימה 1 (אתר מלא)** — בהמתנה לפי בקשת הלקוח
+
+### דומיין + Chrome mobile (30.6.2026)
+- **דומיין:** `card.yaffholistic.com` (CNAME → mench-coder.github.io, Cloudflare DNS only)
+- **yaffholistic.com** — שמור לאתר מלא
+- **תיקון קפיצות Chrome mobile:** body `display:block` (לא flex), `.wrap { margin:0 auto }` (לא margin:auto אנכי), מעגל דекораטивי ב-`top:10vh` (לא 50%), אנימציית כניסה opacity-only במובייל
 
 ## עדכוני 29.6.2026 — ליטוש סופי לפי פידבק (נוגה + לוש)
 

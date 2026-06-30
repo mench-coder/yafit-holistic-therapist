@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZDRSXKQDRL"></script>
@@ -16,18 +16,18 @@
   <title>יפית מוכתרי | מטפלת הוליסטית גוף-נפש</title>
   <meta name="description" content="יפית מוכתרי — מטפלת הוליסטית גוף-נפש. קליניקה בתל אביב. כשהגוף נרגע, הנפש מתחילה לדבר. דברו איתי בווטסאפ." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mench-coder.github.io/yafit-holistic-therapist/card-f.html?v=3" />
+  <meta property="og:url" content="https://card.yaffholistic.com/card-f.html?v=1" />
   <meta property="og:title" content="יפית מוכתרי | מטפלת הוליסטית גוף-נפש" />
   <meta property="og:description" content="כשהגוף נרגע, הנפש מתחילה לדבר. 15 שנות ניסיון. קליניקה בתל אביב. בואו נדבר." />
-  <meta property="og:image" content="https://mench-coder.github.io/yafit-holistic-therapist/assets/images/og-card-f.jpg?v=3" />
-  <meta property="og:image:secure_url" content="https://mench-coder.github.io/yafit-holistic-therapist/assets/images/og-card-f.jpg?v=3" />
+  <meta property="og:image" content="https://card.yaffholistic.com/assets/images/og-card-f.jpg?v=1" />
+  <meta property="og:image:secure_url" content="https://card.yaffholistic.com/assets/images/og-card-f.jpg?v=1" />
   <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:image:alt" content="יפית מוכתרי — מטפלת הוליסטית גוף-נפש" />
   <meta property="og:locale" content="he_IL" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://mench-coder.github.io/yafit-holistic-therapist/assets/images/og-card-f.jpg?v=3" />
+  <meta name="twitter:image" content="https://card.yaffholistic.com/assets/images/og-card-f.jpg?v=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Frank+Ruhl+Libre:wght@300;400&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -46,6 +46,10 @@
       --f-deco:   'Cormorant Garamond', Georgia, serif;
       --f-body:   'Assistant', Arial, sans-serif;
     }
+    html {
+      overflow-anchor: none;
+      -webkit-text-size-adjust: 100%;
+    }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: var(--f-body);
@@ -53,12 +57,13 @@
       color: var(--ink);
       direction: rtl;
       min-height: 100svh;
-      display: flex;
-      padding: 2.4rem 1.4rem;
+      display: block;
+      padding: max(2.4rem, env(safe-area-inset-top, 0px)) 1.4rem max(3rem, env(safe-area-inset-bottom, 0px));
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       position: relative;
       overflow-x: hidden;
+      overflow-y: auto;
     }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
@@ -82,8 +87,8 @@
       width: 95vmin; height: 95vmin;
       border-radius: 50%;
       border: 1px solid var(--line);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -58%);
+      top: 10vh; left: 50%;
+      transform: translateX(-50%);
       pointer-events: none;
     }
     body::after {
@@ -96,7 +101,7 @@
       pointer-events: none;
     }
 
-    .wrap { width: 100%; max-width: 380px; margin: auto; text-align: center; position: relative; z-index: 1; }
+    .wrap { width: 100%; max-width: 380px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
 
     .reveal { opacity: 0; animation: fadeUp 0.9s cubic-bezier(0.22,0.61,0.36,1) forwards; }
     .d1 { animation-delay: 0.15s; } .d2 { animation-delay: 0.3s; }
@@ -273,6 +278,12 @@
     @media (prefers-reduced-motion: reduce) {
       .reveal { animation-duration: 0.01s; }
       .ring-spin, .ring-spin-2, .breath span, .status-dot { animation: none; }
+    }
+
+    /* Chrome mobile: no vertical shift on entry (translateY caused jump with toolbar) */
+    @media (max-width: 480px) {
+      .reveal { animation-name: fadeIn; }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     }
   </style>
 </head>

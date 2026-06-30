@@ -8,7 +8,7 @@ Static one-page website for **יפית מוכתרי**, a holistic body-mind ther
 
 ## Official business card (approved 30.6.2026)
 
-**Share link (WhatsApp):** https://mench-coder.github.io/yafit-holistic-therapist/card-f.html?v=2
+**Share link (WhatsApp):** https://card.yaffholistic.com/card-f.html?v=1
 
 Only `card-f.html` is active for distribution. Versions A–E are archived.
 
