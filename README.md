@@ -1,10 +1,18 @@
 # Yafit — Holistic Body-Mind Therapist
 
-Static one-page website for **יפית**, a holistic body-mind therapist in Tel Aviv.
+Static one-page website for **יפית מוכתרי**, a holistic body-mind therapist in Tel Aviv.
 
 > **This is NOT Yaff Living.**  
 > Yaff Living (property management) is a separate Next.js project.  
 > See: `../YAFF LIVING - Property Management & Care/yaff-living`
+
+## Official business card (approved 30.6.2026)
+
+**Share link (WhatsApp):** https://mench-coder.github.io/yafit-holistic-therapist/card-f.html?v=2
+
+Only `card-f.html` is active for distribution. Versions A–E are archived.
+
+**Analytics:** GA4 `G-ZDRSXKQDRL` — https://analytics.google.com/
 
 ## Quick start
 
