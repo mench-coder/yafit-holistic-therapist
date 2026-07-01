@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=1080, initial-scale=1.0" />
+  <title>יפית מוכתרי — סט סטוריז</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Frank+Ruhl+Libre:wght@300;400;500;700&family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:       #FBFBF9;
+      --mist:     #EEF1EC;
+      --sky:      #D8E4E2;
+      --sage:     #7E957F;
+      --sage-dk:  #54684F;
+      --ink:      #28302B;
+      --ink-soft: #76807A;
+      --line:     #E2E5DF;
+      --cream:    #F4F1E9;
+      --f-display:'Frank Ruhl Libre', Georgia, serif;
+      --f-deco:   'Cormorant Garamond', Georgia, serif;
+      --f-body:   'Assistant', Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--f-body);
+      background: #cfd6cf;
+      color: var(--ink);
+      direction: rtl;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+
+    /* ---------- base slide ---------- */
+    .story {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      background: var(--bg);
+      overflow: hidden;
+      margin: 0 auto 40px;
+    }
+    .inner {
+      position: relative;
+      z-index: 3;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 150px 120px;
+    }
+
+    /* ---------- shared decor ---------- */
+    .halo {
+      position: absolute; border-radius: 50%;
+      border: 1.5px solid var(--line);
+      left: 50%; transform: translateX(-50%);
+      z-index: 1; pointer-events: none;
+    }
+    .glow {
+      position: absolute; border-radius: 50%;
+      z-index: 1; pointer-events: none;
+      background: radial-gradient(circle, var(--mist), transparent 70%);
+    }
+    .botanical {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      height: 520px; z-index: 2; pointer-events: none;
+      background: url('assets/images/styled/flowers-beige.png') center bottom / cover no-repeat;
+      opacity: 0.42;
+      -webkit-mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.5) 48%, transparent 100%);
+      mask-image: linear-gradient(to top, #000 0%, rgba(0,0,0,.5) 48%, transparent 100%);
+    }
+    .botanical.top {
+      bottom: auto; top: 0;
+      transform: scaleY(-1);
+      opacity: 0.28; height: 380px;
+    }
+
+    .eyebrow {
+      font-size: 30px; font-weight: 600;
+      letter-spacing: 0.06em; color: var(--sage-dk);
+      display: inline-flex; align-items: center; gap: 18px;
+      margin-bottom: 60px;
+    }
+    .eyebrow .rule { width: 60px; height: 1.5px; background: var(--sage); opacity: .6; }
+
+    .breath { display: flex; align-items: center; justify-content: center; gap: 20px; }
+    .breath span { width: 14px; height: 14px; border-radius: 50%; background: var(--sage); opacity: .5; }
+    .breath span:nth-child(2) { transform: scale(1.55); opacity: .9; }
+
+    .sign {
+      font-size: 30px; font-weight: 500; letter-spacing: .02em;
+      color: var(--ink-soft);
+    }
+    .sign b { color: var(--sage-dk); font-weight: 700; }
+
+    /* ---------- S1 : hook ---------- */
+    #s1 { background: linear-gradient(180deg, #FBFBF9 0%, #F3F5F0 100%); }
+    #s1 .h {
+      font-family: var(--f-display); font-weight: 400;
+      font-size: 118px; line-height: 1.14; letter-spacing: -.01em;
+      color: var(--ink);
+    }
+    #s1 .h em { font-style: normal; color: var(--sage-dk); }
+    #s1 .sub {
+      margin-top: 54px; font-size: 42px; font-weight: 400;
+      line-height: 1.55; color: var(--ink-soft); max-width: 720px;
+    }
+    #s1 .breath { margin-top: 70px; }
+
+    /* ---------- S2 : empathy ---------- */
+    #s2 { background: radial-gradient(120% 80% at 50% 30%, #EEF1EC 0%, #FBFBF9 60%); }
+    #s2 .h {
+      font-family: var(--f-display); font-weight: 400;
+      font-size: 104px; line-height: 1.18; color: var(--ink);
+    }
+    #s2 .h em { font-style: normal; color: var(--sage-dk); }
+    #s2 .sub {
+      margin-top: 58px; font-size: 40px; line-height: 1.6;
+      color: var(--ink-soft); max-width: 700px;
+    }
+    #s2 .sub b { color: var(--ink); font-weight: 600; }
+
+    /* ---------- S3 : tagline hero (inverted) ---------- */
+    #s3 { background: linear-gradient(155deg, #7E957F 0%, #54684F 100%); color: #F6F4EE; }
+    #s3 .eyebrow { color: rgba(246,244,238,.85); }
+    #s3 .eyebrow .rule { background: rgba(246,244,238,.6); opacity: 1; }
+    #s3 .tag {
+      font-family: var(--f-deco); font-style: italic; font-weight: 500;
+      font-size: 120px; line-height: 1.22; color: #FFFFFF;
+    }
+    #s3 .tag em { font-style: italic; color: #E7EDDF; }
+    #s3 .sign { margin-top: 74px; color: rgba(246,244,238,.9); }
+    #s3 .sign b { color: #fff; }
+    #s3 .breath { margin-top: 60px; }
+    #s3 .breath span { background: #F6F4EE; }
+
+    /* ---------- S4 : method ---------- */
+    #s4 .h {
+      font-family: var(--f-display); font-weight: 400;
+      font-size: 82px; line-height: 1.15; color: var(--ink);
+      margin-bottom: 20px;
+    }
+    #s4 .lead {
+      font-size: 36px; color: var(--ink-soft); margin-bottom: 66px;
+    }
+    #s4 .list { width: 100%; max-width: 640px; }
+    #s4 .row {
+      display: flex; align-items: center; justify-content: center; gap: 24px;
+      padding: 30px 0;
+      border-bottom: 1.5px solid var(--line);
+      font-size: 46px; font-weight: 500; color: var(--ink);
+    }
+    #s4 .row:last-child { border-bottom: 0; }
+    #s4 .row .dot {
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--sage); flex-shrink: 0;
+    }
+    #s4 .foot {
+      margin-top: 64px; font-family: var(--f-deco); font-style: italic;
+      font-size: 46px; line-height: 1.4; color: var(--sage-dk); max-width: 660px;
+    }
+
+    /* ---------- S5 : about / photo ---------- */
+    #s5 .photo-wrap { position: relative; width: 500px; height: 500px; margin-bottom: 70px; }
+    #s5 .photo-wrap::before {
+      content: ''; position: absolute; inset: -28px; border-radius: 50%;
+      border: 2px solid var(--sage); opacity: .45;
+    }
+    #s5 .ring {
+      position: absolute; inset: -64px; border-radius: 50%;
+      border: 2px dashed var(--sage); opacity: .4;
+    }
+    #s5 .ring::after {
+      content: ''; position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+      width: 20px; height: 20px; border-radius: 50%; background: var(--sage-dk);
+      box-shadow: 0 0 0 9px rgba(126,149,127,.16);
+    }
+    #s5 .photo {
+      position: absolute; inset: 0; border-radius: 50%; overflow: hidden;
+      box-shadow: 0 40px 90px rgba(40,48,43,.18);
+    }
+    #s5 .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 15%; }
+    #s5 .h {
+      font-family: var(--f-display); font-weight: 400; font-size: 92px;
+      line-height: 1.05; margin-bottom: 14px;
+    }
+    #s5 .role { font-size: 36px; font-weight: 500; color: var(--sage-dk); margin-bottom: 48px; }
+    #s5 .body {
+      font-size: 40px; line-height: 1.62; color: var(--ink-soft); max-width: 720px;
+    }
+    #s5 .body b { color: var(--ink); font-weight: 600; }
+    #s5 .foot { margin-top: 54px; font-size: 34px; font-weight: 500; color: var(--ink-soft); }
+
+    /* ---------- S6 : CTA ---------- */
+    #s6 { background: linear-gradient(180deg, #FBFBF9 0%, #EEF1EC 100%); }
+    #s6 .status {
+      display: inline-flex; align-items: center; gap: 16px;
+      font-size: 32px; font-weight: 600; color: var(--sage-dk); margin-bottom: 54px;
+    }
+    #s6 .status .d {
+      width: 16px; height: 16px; border-radius: 50%; background: var(--sage);
+      box-shadow: 0 0 0 8px rgba(126,149,127,.18);
+    }
+    #s6 .h {
+      font-family: var(--f-display); font-weight: 400; font-size: 116px;
+      line-height: 1.12; color: var(--ink); margin-bottom: 40px;
+    }
+    #s6 .h em { font-style: normal; color: var(--sage-dk); }
+    #s6 .sub { font-size: 42px; line-height: 1.55; color: var(--ink-soft); max-width: 660px; margin-bottom: 90px; }
+    #s6 .cta {
+      display: inline-flex; align-items: center; gap: 24px;
+      background: linear-gradient(135deg, var(--sage), var(--sage-dk));
+      color: #fff; font-size: 46px; font-weight: 700;
+      border-radius: 30px; padding: 40px 72px;
+      box-shadow: 0 30px 66px rgba(84,104,79,.34);
+    }
+    #s6 .cta svg { width: 52px; height: 52px; }
+    #s6 .link {
+      margin-top: 46px; font-size: 34px; font-weight: 600;
+      letter-spacing: .03em; color: var(--sage-dk);
+    }
+    #s6 .link .arrow { margin-inline-start: 12px; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== S1 · HOOK ===== -->
+  <section class="story" id="s1">
+    <span class="halo" style="width:1180px;height:1180px;top:-260px;"></span>
+    <span class="glow" style="width:760px;height:760px;bottom:-160px;right:-180px;"></span>
+    <div class="botanical" style="opacity:.30;height:440px;"></div>
+    <div class="inner">
+      <span class="eyebrow"><span class="rule"></span>מטפלת הוליסטית · גוף-נפש<span class="rule"></span></span>
+      <p class="h">לפעמים הגוף<br />עייף ממה<br /><em>שהנפש מחזיקה.</em></p>
+      <p class="sub">סטרס, עומס, כאב —<br />גם כשהכול נראה בסדר.</p>
+      <div class="breath"><span></span><span></span><span></span></div>
+    </div>
+  </section>
+
+  <!-- ===== S2 · EMPATHY ===== -->
+  <section class="story" id="s2">
+    <span class="halo" style="width:1320px;height:1320px;top:300px;opacity:.5;"></span>
+    <span class="halo" style="width:980px;height:980px;top:460px;opacity:.35;"></span>
+    <div class="botanical"></div>
+    <div class="inner">
+      <span class="eyebrow"><span class="rule"></span>מוכר לך?<span class="rule"></span></span>
+      <p class="h">הכול נראה בסדר.<br /><em>אבל בפנים,<br />משהו לא נרגע.</em></p>
+      <p class="sub">הגוף סופג. הנפש מחזיקה.<br />עד שמתחילים <b>להקשיב</b>.</p>
+    </div>
+  </section>
+
+  <!-- ===== S3 · TAGLINE HERO ===== -->
+  <section class="story" id="s3">
+    <span class="halo" style="width:1240px;height:1240px;top:-220px;border-color:rgba(255,255,255,.22);"></span>
+    <span class="halo" style="width:1560px;height:1560px;top:640px;border-color:rgba(255,255,255,.14);"></span>
+    <span class="glow" style="width:900px;height:900px;top:-260px;left:-240px;background:radial-gradient(circle,rgba(255,255,255,.14),transparent 70%);"></span>
+    <div class="inner">
+      <span class="eyebrow"><span class="rule"></span>הגישה שלי<span class="rule"></span></span>
+      <p class="tag">כשהגוף נרגע,<br /><em>הנפש מתחילה<br />לדבר.</em></p>
+      <div class="breath"><span></span><span></span><span></span></div>
+      <p class="sign">יפית מוכתרי <b>· 15 שנות ניסיון</b></p>
+    </div>
+  </section>
+
+  <!-- ===== S4 · METHOD ===== -->
+  <section class="story" id="s4">
+    <span class="halo" style="width:1200px;height:1200px;top:-320px;"></span>
+    <span class="glow" style="width:700px;height:700px;bottom:-140px;left:-160px;background:radial-gradient(circle,var(--sky),transparent 70%);opacity:.5;"></span>
+    <div class="botanical" style="opacity:.34;"></div>
+    <div class="inner">
+      <span class="eyebrow"><span class="rule"></span>איך אני מלווה<span class="rule"></span></span>
+      <p class="h">כלים שמתאימים<br />את עצמם אלייך</p>
+      <div class="list">
+        <div class="row"><span class="dot"></span>שיחה מעמיקה</div>
+        <div class="row"><span class="dot"></span>מגע מרפא</div>
+        <div class="row"><span class="dot"></span>רייקי ועבודה אנרגטית</div>
+        <div class="row"><span class="dot"></span>מדיטציה ונשימה</div>
+        <div class="row"><span class="dot"></span>דמיון מודרך</div>
+      </div>
+      <p class="foot">כל מפגש נבנה סביב<br />מה שאת צריכה באותו רגע.</p>
+    </div>
+  </section>
+
+  <!-- ===== S5 · ABOUT ===== -->
+  <section class="story" id="s5">
+    <span class="halo" style="width:1140px;height:1140px;top:120px;"></span>
+    <span class="glow" style="width:760px;height:760px;top:-200px;right:-200px;"></span>
+    <div class="botanical" style="opacity:.32;"></div>
+    <div class="inner">
+      <div class="photo-wrap">
+        <span class="ring"></span>
+        <div class="photo"><img src="assets/images/styled/yafit-3-circle-beige2.jpeg" alt="יפית מוכתרי" /></div>
+      </div>
+      <h2 class="h">יפית מוכתרי</h2>
+      <p class="role">מטפלת הוליסטית גוף-נפש</p>
+      <p class="body">רקדנית לשעבר — הגוף תמיד<br />היה בשבילי שפה. <b>15 שנה</b> אני<br />מלווה אנשים להקשיב לו מחדש,<br />ולשחרר את מה שהם מחזיקים.</p>
+      <p class="foot">קליניקה בתל אביב</p>
+    </div>
+  </section>
+
+  <!-- ===== S6 · CTA ===== -->
+  <section class="story" id="s6">
+    <span class="halo" style="width:1240px;height:1240px;top:-300px;"></span>
+    <div class="botanical" style="opacity:.5;height:560px;"></div>
+    <div class="inner">
+      <span class="status"><span class="d"></span>זמינה לשיחת היכרות</span>
+      <p class="h">מוכנה להתחיל<br /><em>להקשיב לגוף?</em></p>
+      <p class="sub">שיחת היכרות ראשונה,<br />ללא התחייבות.</p>
+      <span class="cta">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        דברי איתי בוואטסאפ
+      </span>
+      <p class="link">card.yaffholistic.com <span class="arrow">←</span></p>
+    </div>
+  </section>
+
+</body>
+</html>
